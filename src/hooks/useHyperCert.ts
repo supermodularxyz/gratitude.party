@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useContractRead } from "wagmi";
-import { HypercertMinterABI } from "@network-goods/hypercerts-protocol";
-
-const address = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`;
+import { useContractConfig } from "./useContractConfig";
 
 export const useHyperCert = (tokenId: string) => {
   const [metadata, setMetadata] = useState(null);
+  const { abi, address } = useContractConfig("HypercertMinter");
+
   const token = useContractRead({
-    address,
-    abi: HypercertMinterABI,
+    address: address as `0x${string}`,
+    abi,
     functionName: "uri",
     args: [tokenId],
     enabled: !!tokenId,

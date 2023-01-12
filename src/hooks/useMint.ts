@@ -1,14 +1,14 @@
 import { useContractWrite } from "wagmi";
 import { SendTransactionResult } from "@wagmi/core";
 
-import { HypercertMinterABI } from "@network-goods/hypercerts-protocol";
-
-const address = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`;
+import { useContractConfig } from "./useContractConfig";
 
 export const useMint = (onSuccess: (data: SendTransactionResult) => void) => {
+  const { abi, address } = useContractConfig("HypercertMinter");
+
   return useContractWrite({
-    address,
-    abi: HypercertMinterABI,
+    address: address as `0x${string}`,
+    abi,
     functionName: "mintClaim",
     mode: "recklesslyUnprepared",
     onSuccess,

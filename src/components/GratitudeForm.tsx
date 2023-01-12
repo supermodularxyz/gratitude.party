@@ -33,13 +33,14 @@ export const GratitudeForm = () => {
 
   const mint = useMint((data) => router.push(`/tx/${data.hash}`));
 
+  console.log(mint.error);
   const contributor = watch("contributor");
   const ens = useEnsAddress({
     name: contributor,
     enabled: contributor?.length >= 3 && contributor.includes(".eth"),
   });
   const isLoading = formState.isSubmitting;
-
+  console.log(formState.isValid);
   return (
     <form
       className="text-lg text-gray-800"
@@ -90,7 +91,7 @@ export const GratitudeForm = () => {
       <div className="text-center ">{content.intro}</div>
 
       <Input
-        {...register("contributor")}
+        {...register("contributor", { required: true })}
         required
         autoFocus
         className="w-full text-center"
@@ -101,13 +102,13 @@ export const GratitudeForm = () => {
         for{" "}
         <Input
           required
-          {...register("reason")}
+          {...register("reason", { required: true })}
           className=""
           placeholder="helping me out with"
         />{" "}
         at{" "}
         <Input
-          {...register("time")}
+          {...register("time", { required: true })}
           required
           max={formatDate(new Date())}
           className=""
@@ -119,6 +120,7 @@ export const GratitudeForm = () => {
         color="indigo"
         className="mt-8 mb-2 w-full"
         type="submit"
+        disabled={isLoading || !formState.isValid}
       >
         Generate
       </Button>

@@ -2,15 +2,21 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { Chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { optimism, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import "../styles/globals.css";
+import { contracts } from "config";
+
+const onlyWithAddress = (chain: Chain) =>
+  Object.entries(contracts?.[chain.id] || {}).every(
+    ([_, { address }]) => address
+  );
 
 const { chains, provider } = configureChains(
-  [optimism, goerli],
+  [optimism, goerli].filter(onlyWithAddress),
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
     publicProvider(),

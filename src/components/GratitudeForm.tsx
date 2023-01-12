@@ -33,7 +33,6 @@ export const GratitudeForm = () => {
 
   const mint = useMint((data) => router.push(`/tx/${data.hash}`));
 
-  console.log(mint.error);
   const contributor = watch("contributor");
   const ens = useEnsAddress({
     name: contributor,

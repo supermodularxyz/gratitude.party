@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useContractRead, useQuery } from "wagmi";
 import { useContractConfig } from "./useContractConfig";
 
-export const useHyperCert = (tokenId: string) => {
+export const useHypercert = (tokenId: string) => {
   /*
   TODO: Token not found?
-  
+
   return useQuery(["certs", tokenId], () => claimById(tokenId), {
     enabled: Boolean(tokenId),
   });

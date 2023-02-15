@@ -2,7 +2,7 @@ import { Layout } from "layouts/Layout";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useHyperCert } from "hooks/useHyperCert";
+import { useHypercert } from "hooks/useHypercert";
 import { OpenSeaButton } from "components/OpenSeaButton";
 import { TweetButton } from "components/TweetButton";
 
@@ -10,7 +10,7 @@ const HyperCert: NextPage = () => {
   const router = useRouter();
   const tokenId = router.query.tokenId as string;
 
-  const cert = useHyperCert(tokenId);
+  const cert = useHypercert(tokenId);
   const { image, description } = (cert.metadata as any) || {};
 
   return (

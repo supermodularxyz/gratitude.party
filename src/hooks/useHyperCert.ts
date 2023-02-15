@@ -1,8 +1,16 @@
+import { claimById } from "@hypercerts-org/hypercerts-sdk";
 import { useState } from "react";
-import { useContractRead } from "wagmi";
+import { useContractRead, useQuery } from "wagmi";
 import { useContractConfig } from "./useContractConfig";
 
 export const useHyperCert = (tokenId: string) => {
+  /*
+  TODO: Token not found?
+  
+  return useQuery(["certs", tokenId], () => claimById(tokenId), {
+    enabled: Boolean(tokenId),
+  });
+  */
   const [metadata, setMetadata] = useState(null);
   const { abi, address } = useContractConfig("HypercertMinter");
 

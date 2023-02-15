@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useWaitForTransaction } from "wagmi";
-import { HypercertMinterABI } from "@network-goods/hypercerts-protocol";
+import { HypercertMinterABI } from "@hypercerts-org/hypercerts-sdk";
 import { Spinner } from "components/Spinner";
 
 const MintingCert: NextPage = () => {

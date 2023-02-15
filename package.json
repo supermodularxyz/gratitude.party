@@ -11,8 +11,7 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
     "@hookform/resolvers": "^2.9.10",
-    "@network-goods/hypercerts-protocol": "^0.0.6",
-    "@network-goods/hypercerts-sdk": "^0.0.12",
+    "@hypercerts-org/hypercerts-sdk": "^0.0.21",
     "@rainbow-me/rainbowkit": "^0.8.1",
     "@wagmi/core": "^0.8.14",
     "clsx": "^1.2.1",

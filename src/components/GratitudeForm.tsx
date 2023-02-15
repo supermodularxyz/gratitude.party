@@ -2,13 +2,8 @@ import { Input } from "components/Form";
 import { useForm } from "react-hook-form";
 import { Button } from "components/Button";
 
-import { useMint } from "hooks/useMint";
 import { useEnsAddress } from "wagmi";
 import { format } from "date-fns";
-import { storeMetadata, validateMetaData } from "@network-goods/hypercerts-sdk";
-import { ipfsClient } from "utils/ipfs";
-import { generateSVG } from "utils/svg";
-import { useRouter } from "next/router";
 import { isAddress } from "ethers/lib/utils.js";
 
 const formatDate = (date: Date) => format(date, "yyyy-MM-dd'T'HH:mm");
@@ -23,15 +18,20 @@ const testValues = {
   time: "2023-01-01T01:00",
 };
 
-const calcTime = (d: Date) => [+d, +d, +d, +d].map((v) => v / 1000);
+type Props = {
+  onSubmit: (form: {
+    description: string;
+    contributor: string;
+    ens?: string | null;
+    reason: string;
+    time: string;
+  }) => void;
+};
 
-export const GratitudeForm = () => {
+export const GratitudeForm = ({ onSubmit }: Props) => {
   const { register, handleSubmit, watch, formState, setError } = useForm({
-    // defaultValues: testValues,
+    defaultValues: testValues,
   });
-  const router = useRouter();
-
-  const mint = useMint((data) => router.push(`/tx/${data.hash}`));
 
   const contributor = watch("contributor");
   const ens = useEnsAddress({
@@ -39,47 +39,15 @@ export const GratitudeForm = () => {
     enabled: contributor?.length >= 3 && contributor.includes(".eth"),
   });
   const isLoading = formState.isSubmitting;
-  console.log(formState.isValid);
+
   return (
     <form
       className="text-lg text-gray-800"
       onSubmit={handleSubmit(async ({ contributor, reason, time }) => {
         const description = `${content.intro} ${contributor} for ${reason} at ${time}.`;
-        const name = "gratitude.party";
-
-        const contributorAddress = ens.data || contributor;
-        const [workTimeStart, workTimeEnd, impactTimeStart, impactTimeEnd] =
-          calcTime(new Date(time));
 
         if (isAddress(contributor) || ens.data) {
-          const svg = await generateSVG({
-            contributor,
-            reason,
-            date: +new Date(time),
-          });
-
-          const claimData = {
-            name,
-            description,
-            image: `data:image/svg+xml;base64,${btoa(svg)}`,
-            ref: "",
-            properties: {
-              impactScopes: "gratitude.party",
-              workScopes: "gratitude.party",
-              impactTimeframe: [impactTimeStart, impactTimeEnd],
-              workTimeframe: [workTimeStart, workTimeEnd],
-              contributors: [contributorAddress],
-            },
-          };
-
-          if (validateMetaData(claimData)) {
-            const cid = await storeMetadata(claimData, ipfsClient);
-            return mint.write?.({
-              recklesslySetUnpreparedArgs: [1, cid],
-            });
-          } else {
-            console.log("Incorrect metadata");
-          }
+          onSubmit({ description, contributor, ens: ens.data, reason, time });
         } else {
           setError("contributor", {
             message: "Invalid address or ENS not found",

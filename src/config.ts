@@ -1,5 +1,5 @@
 import { optimism, goerli, hardhat } from "wagmi/chains";
-import { HypercertMinterABI } from "@network-goods/hypercerts-protocol";
+import { HypercertMinterABI } from "@hypercerts-org/hypercerts-sdk";
 
 export const contracts = {
   [optimism.id]: {

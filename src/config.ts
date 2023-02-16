@@ -11,7 +11,7 @@ export const contracts = {
   [goerli.id]: {
     HypercertMinter: {
       abi: HypercertMinterABI,
-      address: "0xcC08266250930E98256182734913Bf1B36102072",
+      address: "0x94a04ce2e537eaf2bdabd629de503797e7021e87",
     },
   },
   [hardhat.id]: {

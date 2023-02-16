@@ -11,7 +11,8 @@ const HyperCert: NextPage = () => {
   const tokenId = router.query.tokenId as string;
 
   const cert = useHypercert(tokenId);
-  const { image, description } = (cert.metadata as any) || {};
+
+  const { image, description } = (cert.data as any)?.metadata || {};
 
   return (
     <Layout>

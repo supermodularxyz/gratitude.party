@@ -18,8 +18,13 @@ const MintingCert: NextPage = () => {
       const iface = new ethers.utils.Interface(HypercertMinterABI);
       // Get ImpactClaimed event data
       const claim = iface.parseLog(tx.data?.logs?.[1]);
-      // Redirect to tokenId
-      router.push(`/hypercert/${claim.args.id}`);
+
+      // Claim ID is <token_address>-<tokenId>
+      // Not sure why tx.data.to has different casing compared to what the hypercertSdk.claimById() expects
+      // Another way could be to get address from useContractConfig hook
+      const claimId = [tx.data.to.toLowerCase(), claim.args.id].join("-");
+
+      router.push(`/hypercert/${claimId}`);
     }
   }, [tx.data?.logs]);
 

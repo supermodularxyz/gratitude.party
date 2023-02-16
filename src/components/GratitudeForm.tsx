@@ -43,7 +43,7 @@ export const GratitudeForm = ({ onSubmit }: Props) => {
   return (
     <form
       className="text-lg text-gray-800"
-      onSubmit={handleSubmit(async ({ contributor, reason, time }) => {
+      onSubmit={handleSubmit(({ contributor, reason, time }) => {
         const description = `${content.intro} ${contributor} for ${reason} at ${time}.`;
 
         if (isAddress(contributor) || ens.data) {

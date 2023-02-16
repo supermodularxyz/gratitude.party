@@ -1,4 +1,5 @@
-import { claimById, getData } from "@hypercerts-org/hypercerts-sdk";
+import type { HypercertMetadata } from "@hypercerts-org/hypercerts-sdk";
+import { claimById, getMetadata } from "@hypercerts-org/hypercerts-sdk";
 import { useQuery } from "wagmi";
 
 export const useHypercert = (claimId: string) => {
@@ -6,10 +7,9 @@ export const useHypercert = (claimId: string) => {
     ["certs", claimId],
     () =>
       claimById(claimId).then((r) =>
-        getData(r.claim?.uri as string).then((metadata) => ({
-          ...r.claim,
-          metadata,
-        }))
+        getMetadata(r.claim?.uri as string).then(
+          (metadata: HypercertMetadata) => ({ ...r.claim, metadata })
+        )
       ),
     { enabled: Boolean(claimId) }
   );

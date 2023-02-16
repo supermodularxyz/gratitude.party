@@ -1,24 +1,26 @@
+import type { NextPage } from "next";
 import { Layout } from "layouts/Layout";
-import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useHypercert } from "hooks/useHypercert";
 import { OpenSeaButton } from "components/OpenSeaButton";
 import { TweetButton } from "components/TweetButton";
+import Image from "next/image";
 
 const HyperCert: NextPage = () => {
   const router = useRouter();
-  const tokenId = router.query.tokenId as string;
+  const claimId = router.query.tokenId as string;
 
-  const cert = useHypercert(tokenId);
+  const tokenId = claimId?.split("-")[1];
+  const cert = useHypercert(claimId);
 
-  const { image, description } = (cert.data as any)?.metadata || {};
+  const { image, description } = cert.data?.metadata || {};
 
   return (
     <Layout>
       <div className="mb-4 h-auto w-full">
         {image ? (
-          <img src={image} />
+          <Image width={550} height={850} src={image} alt="Hypercert" />
         ) : (
           <div className="animate-pulse bg-gray-200" style={{ height: 544 }} />
         )}

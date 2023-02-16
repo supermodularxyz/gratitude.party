@@ -2,7 +2,8 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { Chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import type { Chain } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { optimism, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";

@@ -19,7 +19,7 @@ const MintingCert: NextPage = () => {
       // Get ImpactClaimed event data
       const claim = iface.parseLog(tx.data?.logs?.[1]);
 
-      // Claim ID is <token_address>-<tokenId>
+      // Claim ID is <contract_address>-<tokenId>
       // Not sure why tx.data.to has different casing compared to what the hypercertSdk.claimById() expects
       // Another way could be to get address from useContractConfig hook
       const claimId = [tx.data.to.toLowerCase(), claim.args.id].join("-");

@@ -1,5 +1,5 @@
+import type { Address, SendTransactionResult } from "@wagmi/core";
 import { useContractWrite, useMutation } from "wagmi";
-import { SendTransactionResult } from "@wagmi/core";
 
 import {
   HypercertMetadata,
@@ -20,7 +20,7 @@ export const useMintHypercert = (
   const { abi, address } = useContractConfig("HypercertMinter");
 
   const mint = useContractWrite({
-    address: address as `0x${string}`,
+    address: address as Address,
     abi,
     functionName: "mintClaim",
     mode: "recklesslyUnprepared",

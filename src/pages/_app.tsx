@@ -12,7 +12,7 @@ import "../styles/globals.css";
 import { contracts } from "config";
 
 const onlyWithAddress = (chain: Chain) =>
-  Object.entries(contracts?.[chain.id] || {}).every(
+  Object.entries(contracts?.[chain.id as keyof typeof contracts] || {}).every(
     ([_, { address }]) => address
   );
 

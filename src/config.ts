@@ -21,4 +21,4 @@ export const contracts = {
     },
   },
 };
-export type ContractType = keyof (typeof contracts)[1];
+export type ContractType = keyof (typeof contracts)[5];

@@ -7,6 +7,6 @@ export function useContractConfig(contractName: ContractType) {
   const { chain } = useNetwork();
   const empty = { abi: [], address: "" };
   if (!chain?.id) return empty;
-
-  return contracts?.[chain.id]?.[contractName] || empty;
+  const id = chain.id as keyof typeof contracts;
+  return contracts?.[id]?.[contractName] || empty;
 }

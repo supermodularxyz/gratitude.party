@@ -1,5 +1,5 @@
 import { optimism, goerli, hardhat } from "wagmi/chains";
-import { HypercertMinterABI } from "@network-goods/hypercerts-protocol";
+import { HypercertMinterABI } from "@hypercerts-org/hypercerts-sdk";
 
 export const contracts = {
   [optimism.id]: {
@@ -11,7 +11,7 @@ export const contracts = {
   [goerli.id]: {
     HypercertMinter: {
       abi: HypercertMinterABI,
-      address: "0xcC08266250930E98256182734913Bf1B36102072",
+      address: "0x94a04ce2e537eaf2bdabd629de503797e7021e87",
     },
   },
   [hardhat.id]: {
@@ -21,4 +21,4 @@ export const contracts = {
     },
   },
 };
-export type ContractType = keyof (typeof contracts)[1];
+export type ContractType = keyof (typeof contracts)[5];

@@ -11,6 +11,7 @@ specifiers:
   '@types/react-dom': ^18.0.11
   '@typescript-eslint/eslint-plugin': ^5.52.0
   '@typescript-eslint/parser': ^5.52.0
+  '@wagmi/core': ^0.9.5
   autoprefixer: ^10.4.13
   clsx: ^1.2.1
   date-fns: ^2.29.3
@@ -36,6 +37,7 @@ dependencies:
   '@hookform/resolvers': 2.9.11_react-hook-form@7.43.1
   '@hypercerts-org/hypercerts-sdk': 0.0.21_4bewfcp2iebiwuold25d6rgcsy
   '@rainbow-me/rainbowkit': 0.11.0_al3t3skoqw2pcrfr34uzii4n2u
+  '@wagmi/core': 0.9.5_zksa3pqhbwcpfpig4odjhdkovq
   clsx: 1.2.1
   date-fns: 2.29.3
   ethers: 5.7.2
@@ -4902,7 +4904,7 @@ packages:
       '@walletconnect/safe-json': 1.0.1
       '@walletconnect/time': 1.0.2
       tslib: 1.14.1
-      uint8arrays: 3.1.0
+      uint8arrays: 3.1.1
     dev: false
 
   /@walletconnect/safe-json/1.0.0:
@@ -5073,7 +5075,7 @@ packages:
   /@walletconnect/window-metadata/1.0.0:
     resolution: {integrity: sha512-9eFvmJxIKCC3YWOL97SgRkKhlyGXkrHwamfechmqszbypFspaSk+t2jQXAEU7YClHF6Qjw5eYOmy1//zFi9/GA==}
     dependencies:
-      '@walletconnect/window-getters': 1.0.0
+      '@walletconnect/window-getters': 1.0.1
     dev: false
 
   /@walletconnect/window-metadata/1.0.1:
@@ -13251,7 +13253,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 20.2.4
+      yargs-parser: 20.2.9
     dev: false
 
   /yargs/17.6.2:

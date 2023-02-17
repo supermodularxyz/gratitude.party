@@ -7,6 +7,7 @@
 
 /** @type {import("next").NextConfig} */
 const config = {
+  env: { NFT_STORAGE_TOKEN: process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY || "" },
   reactStrictMode: true,
   swcMinify: true,
   eslint: {
@@ -19,4 +20,5 @@ const config = {
     defaultLocale: "en",
   },
 };
+
 export default config;

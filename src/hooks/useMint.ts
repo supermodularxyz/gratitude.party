@@ -1,48 +1,42 @@
-import type { Address, SendTransactionResult } from "@wagmi/core";
-import { useContractWrite, useMutation } from "wagmi";
-
+import { ContractTransaction } from "ethers";
+import { useMutation, useNetwork, useSigner } from "wagmi";
 import {
+  HypercertMinting,
   HypercertMetadata,
-  storeMetadata,
-  validateMetaData,
 } from "@hypercerts-org/hypercerts-sdk";
-import {
-  mintHypercertToken,
-  transferRestrictions,
-} from "@hypercerts-org/hypercerts-sdk/lib/minting";
 
-import { ipfsClient } from "utils/ipfs";
 import { useContractConfig } from "./useContractConfig";
 
 export const useMintHypercert = (
-  onSuccess: (data: SendTransactionResult) => void
+  onSuccess: (data: ContractTransaction) => void
 ) => {
-  const { abi, address } = useContractConfig("HypercertMinter");
+  const { chain } = useNetwork();
+  const { data: signer } = useSigner();
+  const { address: contractAddress } = useContractConfig("HypercertMinter");
 
-  const mint = useContractWrite({
-    address: address as Address,
-    abi,
-    functionName: "mintClaim",
-    mode: "recklesslyUnprepared",
-    onSuccess,
-  });
+  return useMutation(
+    async ({
+      address,
+      claimData,
+    }: {
+      address: string;
+      claimData: HypercertMetadata;
+    }) => {
+      if (!chain) return null;
 
-  return useMutation(async (claimData: HypercertMetadata) => {
-    if (validateMetaData(claimData)) {
-      return storeMetadata(claimData, ipfsClient).then((cid) => {
-        console.log("Metadata stored:", cid);
+      const rpc = chain?.rpcUrls.default.http[0];
 
-        const args = [1, cid, transferRestrictions.AllowAll];
-        console.log("Minting Hypercert:", args);
-
-        return mint.write?.({ recklesslySetUnpreparedArgs: args });
-
-        // TODO: Doesn't work because NFT.Storage token is currently not possible to set
-        // return mintHypercertToken(claimData, 1, transferRestrictions.AllowAll);
+      const { mintHypercert, transferRestrictions } = HypercertMinting({
+        provider: signer as any,
+        chainConfig: { chainID: String(chain.id), contractAddress, rpc } as any,
       });
-    } else {
-      console.log("Incorrect metadata");
-      return null;
+
+      return mintHypercert(
+        address,
+        claimData,
+        1,
+        transferRestrictions.AllowAll
+      ).then(onSuccess);
     }
-  });
+  );
 };

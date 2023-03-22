@@ -35,18 +35,26 @@ const Home: NextPage = () => {
             const claimData = {
               name: "gratitude.party",
               description,
+              external_url: `${global.location.origin}`,
               image: `data:image/svg+xml;base64,${btoa(svg)}`,
               ref: "",
-              properties: {
-                impactScopes: "gratitude.party",
-                workScopes: "gratitude.party",
-                impactTimeframe: [impactTimeStart, impactTimeEnd],
-                workTimeframe: [workTimeStart, workTimeEnd],
-                contributors: [contributorAddress],
+              properties: [],
+              hypercert: {
+                impact_scope: { value: ["gratitude.party"] },
+                work_scope: { value: ["gratitude.party"] },
+                impact_timeframe: {
+                  value: [impactTimeStart as number, impactTimeEnd as number],
+                },
+                work_timeframe: {
+                  value: [workTimeStart as number, workTimeEnd as number],
+                },
+                contributors: {
+                  value: [contributorAddress],
+                },
               },
             };
 
-            mint.mutate(claimData);
+            mint.mutate({ address: contributorAddress, claimData });
           }}
         />
       </div>

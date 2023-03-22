@@ -23,6 +23,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.7",
     "satori": "^0.4.4",
+    "tailwind-variants": "^0.1.1",
     "wagmi": "^0.12.6",
     "zod": "^3.21.4"
   },

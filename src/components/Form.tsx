@@ -1,33 +1,17 @@
-import { ElementType, forwardRef } from "react";
-import cx from "clsx";
+import { tv } from "tailwind-variants";
 
-import { Box, BoxProps, PolymorphicRef } from "./Box";
+import { createComponent } from ".";
 
-const inputClass = `font-semibold focus:ring-1 rounded bg-transparent p-2 text-gray-800 outline-none  focus:border-indigo-600 focus:ring-indigo-600 placeholder-gray-400`;
-export const Input = forwardRef(
-  <C extends ElementType>(
-    { className, ...props }: BoxProps<"input">,
-    ref?: PolymorphicRef<C>
-  ) => (
-    <Box
-      as="input"
-      ref={ref}
-      className={cx(inputClass, className)}
-      {...props}
-    />
-  )
-);
+const input = tv({
+  base: "block w-full p-2 border border-gray-200 focus:outline-indigo-500 bg-white",
+});
+const textarea = tv({
+  base: "rounded block w-full resize-none rounded border border-gray-200 bg-transparent p-2 focus:outline-indigo-500 bg-white",
+});
+const label = tv({
+  base: "text-sm font-bold text-gray-500",
+});
 
-export const Textarea = forwardRef(
-  <C extends ElementType>(
-    { className, ...props }: BoxProps<"textarea">,
-    ref?: PolymorphicRef<C>
-  ) => (
-    <Box
-      as="textarea"
-      ref={ref}
-      className={cx(inputClass, className)}
-      {...props}
-    />
-  )
-);
+export const Input = createComponent("input", input);
+export const Textarea = createComponent("textarea", textarea);
+export const Label = createComponent("label", label);

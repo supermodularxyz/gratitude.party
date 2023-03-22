@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+import { BackgroundCurves } from "components/BackgroundCurves";
+import { BackgroundFlares } from "components/BackgroundFlares";
+import { ConnectWalletButton } from "components/ConnectWalletButton";
 
 export const Layout = (props: PropsWithChildren) => {
   return (
@@ -12,30 +15,23 @@ export const Layout = (props: PropsWithChildren) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex min-h-screen flex-col justify-center bg-indigo-900 font-mono sm:pb-12">
-        <div className="flex justify-end p-2">
-          <ConnectButton showBalance={false} />
+      <div className="flex min-h-screen flex-col justify-center">
+        <div className="flex items-center justify-between p-6">
+          <Link href={"/"} className="text-lg font-bold text-indigo-900">
+            gratitude.party
+          </Link>
+          <ConnectWalletButton />
         </div>
-        <main className="container relative mx-auto flex flex-1 flex-col overflow-hidden bg-white p-4 sm:max-w-sm sm:rounded">
+        <main className="container relative mx-auto flex max-w-screen-sm flex-1 flex-col overflow-hidden p-4 ">
           <div className="flex-1">{props.children}</div>
-          <footer className="text-center text-xs">
-            <div>
-              crafted with{" "}
-              <span className="relative animate-pulse text-pink-800">
-                ♥<span className="absolute left-0 animate-ping">♥</span>
-              </span>{" "}
-              at{" "}
-              <Link
-                className="text-indigo-700 hover:text-indigo-500"
-                target="_blank"
-                href="https://supermodular.xyz"
-              >
-                supermodular.xyz
-              </Link>
-            </div>
-            <div>we are building a more regenerative internet</div>
-          </footer>
         </main>
+        <footer className="container mx-auto max-w-screen-lg p-4 text-xs">
+          {
+            "made with <3 at supermodular.xyz | we are building a more regerative internet | learn more"
+          }
+        </footer>
+        <BackgroundCurves />
+        <BackgroundFlares />
       </div>
     </>
   );

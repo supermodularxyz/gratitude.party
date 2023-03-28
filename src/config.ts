@@ -5,13 +5,15 @@ export const contracts = {
   [optimism.id]: {
     HypercertMinter: {
       abi: HypercertMinterABI,
-      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "",
+      address:
+        process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
+        "0x822F17A9A5EeCFd66dBAFf7946a8071C265D1d07",
     },
   },
   [goerli.id]: {
     HypercertMinter: {
       abi: HypercertMinterABI,
-      address: "0x94a04ce2e537eaf2bdabd629de503797e7021e87",
+      address: "0x822F17A9A5EeCFd66dBAFf7946a8071C265D1d07",
     },
   },
   [hardhat.id]: {

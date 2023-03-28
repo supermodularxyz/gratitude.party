@@ -31,7 +31,7 @@ type Props = {
 const MAX_REASON_LENGTH = 144;
 export const GratitudeForm = ({ onSubmit }: Props) => {
   const { register, handleSubmit, watch, formState, setError } = useForm({
-    // defaultValues: testValues,
+    defaultValues: testValues,
   });
 
   const contributor = watch("contributor");

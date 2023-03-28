@@ -15,13 +15,7 @@ export const useMintHypercert = (
   const { address: contractAddress } = useContractConfig("HypercertMinter");
 
   return useMutation(
-    async ({
-      address,
-      claimData,
-    }: {
-      address: string;
-      claimData: HypercertMetadata;
-    }) => {
+    async (props: { address: string; claimData: HypercertMetadata }) => {
       if (!chain) return null;
 
       const rpc = chain?.rpcUrls.default.http[0];
@@ -32,8 +26,8 @@ export const useMintHypercert = (
       });
 
       return mintHypercert(
-        address,
-        claimData,
+        props.address,
+        props.claimData,
         1,
         transferRestrictions.AllowAll
       ).then(onSuccess);

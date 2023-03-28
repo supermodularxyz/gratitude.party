@@ -57,7 +57,6 @@ const Home: NextPage = () => {
                 },
               },
             };
-
             mint.mutate({ address: contributorAddress, claimData });
           }}
         />

@@ -1,21 +1,22 @@
 import { type NextPage } from "next";
-
-import { Layout } from "layouts/Layout";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMintHypercert } from "hooks/useMint";
+import z from "zod";
+import { useFormContext } from "react-hook-form";
+
+import site from "config/site";
+import { Layout } from "layouts/Layout";
 import { DesignStepper } from "components/DesignStepper";
 import { Button } from "components/Button";
 import { Designer, useDesign } from "components/Designer";
-import Link from "next/link";
 import { Form } from "components/Form";
-
-import z from "zod";
 import { GratitudeForm, gratitudeTemplate } from "components/GratitudeForm";
+import { useMintHypercert } from "hooks/useMint";
 import { generateSVG } from "utils/svg";
-import { useFormContext } from "react-hook-form";
 
 const Schema = z.object({
   contributor: z.string(),
+  contributorAddress: z.string(),
   reason: z.string(),
 });
 
@@ -55,25 +56,23 @@ const Design: NextPage = () => {
           reason: "being such a great chef",
         }}
         schema={Schema}
-        onSubmit={async ({ contributor, reason }) => {
+        onSubmit={async ({ contributor, contributorAddress, reason }) => {
           const description = gratitudeTemplate({ contributor, reason });
           const svg = await generateSVG({ text: description, ...design });
 
-          console.log(description);
-          return;
           const [workTimeStart, workTimeEnd, impactTimeStart, impactTimeEnd] =
             calcTime(new Date());
 
           const claimData = {
-            name: "gratitude.party",
+            name: site.title,
             description,
             external_url: `${global.location.origin}`,
             image: `data:image/svg+xml;base64,${btoa(svg)}`,
             ref: "",
             properties: [],
             hypercert: {
-              impact_scope: { value: ["gratitude.party"] },
-              work_scope: { value: ["gratitude.party"] },
+              impact_scope: { value: [site.title] },
+              work_scope: { value: [site.title] },
               impact_timeframe: {
                 value: [impactTimeStart as number, impactTimeEnd as number],
               },
@@ -85,9 +84,6 @@ const Design: NextPage = () => {
               },
             },
           };
-
-          // Store form data
-          // Increment step
 
           mint.mutate({ address: contributorAddress, claimData });
         }}

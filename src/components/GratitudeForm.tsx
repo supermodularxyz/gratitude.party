@@ -15,7 +15,7 @@ export const gratitudeTemplate = ({ contributor = "", reason = "" }) =>
 const MAX_REASON_LENGTH = 144;
 
 export const GratitudeForm = () => {
-  const { watch, setError } = useFormContext();
+  const { watch, setError, setValue } = useFormContext();
 
   const contributor = watch("contributor");
   const reason = watch("reason") || "";
@@ -26,11 +26,10 @@ export const GratitudeForm = () => {
   });
 
   useEffect(() => {
+    const contributorAddress = isAddress(contributor) || ens.data;
+    setValue("contributorAddress", contributorAddress);
     setError("contributor", {
-      message:
-        isAddress(contributor) || ens.data
-          ? ""
-          : "Invalid address or ENS not found",
+      message: contributorAddress ? "" : "Invalid address or ENS not found",
     });
   }, [ens.data, contributor]);
   return (

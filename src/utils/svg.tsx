@@ -2,26 +2,26 @@ import satori from "satori";
 
 export const generateSVG = ({
   text = "",
-  bgColor = "#FFF3D4",
-  textColor = "#FF3C3C",
+  color = ["red", "red"],
   borderRadius = 32,
   width = 100,
   height = 100,
-}) =>
-  fetch("/inter-latin-ext-400-normal.woff")
+}) => {
+  const [background, textColor] = color;
+  return fetch("/inter-latin-ext-400-normal.woff")
     .then((res) => res.arrayBuffer())
     .then((data) =>
       satori(
         <div
           style={{
-            background: bgColor,
+            background,
+            borderColor: textColor,
+            borderWidth: 2,
+            borderRadius,
             display: "flex",
             height: "100%",
             width: "100%",
             color: "white",
-            borderWidth: 2,
-            borderColor: textColor,
-            borderRadius,
           }}
         >
           <div style={{ display: "flex", position: "relative" }}>
@@ -44,6 +44,11 @@ export const generateSVG = ({
           >
             <div
               style={{
+                color: textColor,
+                background,
+                borderColor: textColor,
+                borderWidth: 2,
+                borderRadius,
                 display: "flex",
                 textAlign: "center",
                 alignItems: "center",
@@ -51,11 +56,6 @@ export const generateSVG = ({
                 padding: 40,
                 height: 200,
                 width: 600,
-                color: textColor,
-                background: bgColor,
-                borderWidth: 2,
-                borderColor: textColor,
-                borderRadius,
               }}
             >
               {text}
@@ -76,3 +76,4 @@ export const generateSVG = ({
         }
       )
     );
+};

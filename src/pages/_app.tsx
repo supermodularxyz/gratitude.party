@@ -9,7 +9,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import "../styles/globals.css";
-import { contracts } from "config";
+import { contracts } from "config/contracts";
 
 const onlyWithAddress = (chain: Chain) =>
   Object.entries(contracts?.[chain.id as keyof typeof contracts] || {}).every(

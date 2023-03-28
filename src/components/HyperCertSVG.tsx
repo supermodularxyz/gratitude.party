@@ -3,9 +3,8 @@ import { generateSVG } from "utils/svg";
 
 type SVGProps = {
   text: string;
-  bgColor?: string;
-  textColor?: string;
-  shape?: string;
+  color: string[];
+  shape: string;
 };
 
 const width = 900;
@@ -13,7 +12,7 @@ const height = 500;
 
 export const HyperCertSVG = (props: SVGProps) => {
   const [svg, setSvg] = useState("");
-  console.log(props);
+
   useEffect(() => {
     generateSVG({ ...props, width, height })
       .then((svg) =>

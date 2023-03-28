@@ -24,7 +24,7 @@ export const Layout = (props: PropsWithChildren) => {
           </Link>
           <ConnectWalletButton />
         </div>
-        <main className="container relative mx-auto flex max-w-screen-sm flex-1 flex-col p-4 ">
+        <main className="container relative mx-auto flex max-w-screen-sm flex-1 flex-col p-4 text-gray-900">
           <div className="flex-1">{props.children}</div>
         </main>
         <footer className="container mx-auto max-w-screen-lg p-4 text-xs">

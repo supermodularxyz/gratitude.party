@@ -38,12 +38,11 @@ export const useDesign = () => {
 export const Designer = ({ text = "" }) => {
   const design = useDesign();
 
-  console.log(design);
   return (
     <>
       <div className="absolute -translate-x-full pl-4 pr-12">
         <Label>Colors</Label>
-        <div className="mb-3 grid grid-cols-2 gap-2">
+        <div className="mb-4 grid grid-cols-2 gap-2">
           {colors.map((color, i) => (
             <Circle
               key={i}
@@ -101,4 +100,4 @@ const HalfCircle = createComponent(
   })
 );
 
-const Label = (props: PropsWithChildren) => <h3 className="mb-2" {...props} />;
+const Label = (props: PropsWithChildren) => <h3 className="mb-4" {...props} />;

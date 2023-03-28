@@ -8,7 +8,7 @@ export const generateSVG = ({
   height = 100,
 }) => {
   const [background, textColor] = color;
-  return fetch("/inter-latin-ext-400-normal.woff")
+  return fetch("/Monaco.ttf")
     .then((res) => res.arrayBuffer())
     .then((data) =>
       satori(
@@ -56,6 +56,7 @@ export const generateSVG = ({
                 padding: 40,
                 height: 200,
                 width: 600,
+                lineHeight: "180%",
               }}
             >
               {text}
@@ -67,7 +68,7 @@ export const generateSVG = ({
           height,
           fonts: [
             {
-              name: "Inter",
+              name: "Monaco",
               data,
               weight: 400,
               style: "normal",

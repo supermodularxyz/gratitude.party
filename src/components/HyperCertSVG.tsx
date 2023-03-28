@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { generateSVG } from "utils/svg";
 
 type SVGProps = {
-  contributor: string;
-  reason: string;
-  date: number;
+  text: string;
+  bgColor?: string;
+  textColor?: string;
 };
 
-export const HyperCertSVG = ({ contributor, reason, date }: SVGProps) => {
+const width = 900;
+const height = 500;
+
+export const HyperCertSVG = (props: SVGProps) => {
   const [svg, setSvg] = useState("");
   useEffect(() => {
-    generateSVG({ contributor, reason, date })
+    generateSVG({ ...props, width, height })
       .then((svg) =>
         setSvg(
           svg.replace(
-            `<svg width="550" height="850" `,
+            `<svg width="${width}" height="${height}" `,
             `<svg width="100%" height="100%" `
           )
         )

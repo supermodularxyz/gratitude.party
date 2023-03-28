@@ -57,6 +57,10 @@ const Home: NextPage = () => {
                 },
               },
             };
+
+            // Store form data
+            // Increment step
+
             mint.mutate({ address: contributorAddress, claimData });
           }}
         />

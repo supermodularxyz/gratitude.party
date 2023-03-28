@@ -56,12 +56,6 @@ const Design: NextPage = () => {
         }}
         schema={Schema}
         onSubmit={async ({ contributor, reason }) => {
-          console.log(
-            "submit",
-            { contributor, reason },
-            design.color,
-            design.shape
-          );
           const description = gratitudeTemplate({ contributor, reason });
           const svg = await generateSVG({ text: description, ...design });
 

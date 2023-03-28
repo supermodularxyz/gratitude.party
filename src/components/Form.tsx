@@ -24,7 +24,7 @@ const textarea = tv({
   base: "rounded block w-full resize-none rounded border border-gray-200 bg-transparent p-2 focus:outline-indigo-500 bg-white",
 });
 const label = tv({
-  base: "text-sm font-bold text-gray-500",
+  base: "text-xl text-indigo-900 text-center block mb-1",
 });
 
 export const Input = createComponent("input", input);

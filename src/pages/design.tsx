@@ -6,7 +6,6 @@ import { useFormContext } from "react-hook-form";
 
 import site from "config/site";
 import { Layout } from "layouts/Layout";
-import { DesignStepper } from "components/DesignStepper";
 import { Button } from "components/Button";
 import { Designer, useDesign } from "components/Designer";
 import { Form } from "components/Form";
@@ -20,7 +19,7 @@ const Schema = z.object({
   reason: z.string(),
 });
 
-const CurrentStep = ({ step = "text" }) => {
+const CurrentStep = ({ step = "text", isMinting = false }) => {
   const form = useFormContext();
   switch (step) {
     case "text":
@@ -28,23 +27,50 @@ const CurrentStep = ({ step = "text" }) => {
         <>
           <GratitudeForm />
           <div className="flex justify-center">
-            <Button as={Link} href={"?step=design"} color="gradient">
+            <Button
+              className="w-48"
+              as={Link}
+              href={"?step=design"}
+              color="gradient"
+            >
               Next
             </Button>
           </div>
         </>
       );
     case "design":
-      return <Designer text={gratitudeTemplate(form.watch())} />;
+      return (
+        <>
+          <Designer text={gratitudeTemplate(form.watch())} />
+          <div className="flex justify-between">
+            <Button as={Link} href={"?step=text"} color="ghost">
+              Back
+            </Button>
+            <Button
+              className="w-48"
+              disabled={isMinting}
+              type="submit"
+              color="gradient"
+            >
+              {isMinting ? "Generating..." : "Generate"}
+            </Button>
+          </div>
+        </>
+      );
   }
 
   return null;
 };
 const calcTime = (d: Date) => [+d, +d, +d, +d].map((v) => v / 1000);
+const headings = {
+  text: "Express your gratitude",
+  design: "Customize the design",
+};
 
 const Design: NextPage = () => {
   const router = useRouter();
   const design = useDesign();
+  const step = router.query.step as string;
 
   const mint = useMintHypercert((data) => router.push(`/tx/${data.hash}`));
 
@@ -88,15 +114,13 @@ const Design: NextPage = () => {
           mint.mutate({ address: contributorAddress, claimData });
         }}
       >
-        <div className="relative mb-12 pt-4">
-          <div className="mb-12">
-            <h1 className="mb-6 text-center text-4xl font-bold text-indigo-900">
-              Customize the design
-            </h1>
-            <DesignStepper />
-          </div>
-          <CurrentStep step={router.query.step as string} />
-        </div>
+        <h1 className="mb-6 text-center text-4xl font-bold text-indigo-900">
+          {headings[step as keyof typeof headings]}
+        </h1>
+        <CurrentStep
+          step={router.query.step as string}
+          isMinting={mint.isLoading}
+        />
       </Form>
     </Layout>
   );

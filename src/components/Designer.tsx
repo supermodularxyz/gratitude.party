@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { createComponent } from "components";
-import Link from "next/link";
 import { PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 import { Button, gradient } from "./Button";
@@ -73,14 +72,6 @@ export const Designer = ({ text = "" }) => {
       </div>
       <div className="min-h-96 mb-16">
         <HyperCertSVG color={design.color} shape={design.shape} text={text} />
-      </div>
-      <div className="flex justify-between">
-        <Button as={Link} href={"?step=text"} color="ghost">
-          Back
-        </Button>
-        <Button type="submit" color="gradient">
-          Mint
-        </Button>
       </div>
     </>
   );

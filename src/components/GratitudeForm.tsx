@@ -26,7 +26,7 @@ export const GratitudeForm = () => {
   });
 
   useEffect(() => {
-    const contributorAddress = isAddress(contributor) || ens.data;
+    const contributorAddress = isAddress(contributor) ? contributor : ens.data;
     setValue("contributorAddress", contributorAddress);
     setError("contributor", {
       message: contributorAddress ? "" : "Invalid address or ENS not found",

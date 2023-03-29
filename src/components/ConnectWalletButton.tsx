@@ -6,6 +6,7 @@ import { useDisconnect } from "wagmi";
 
 export const ConnectWalletButton = () => {
   const { disconnect } = useDisconnect();
+  return <ConnectButton />;
   return (
     <ConnectButton.Custom>
       {({ account, openConnectModal, mounted }) => {

@@ -21,6 +21,7 @@ const Schema = z.object({
 
 const CurrentStep = ({ step = "text", isMinting = false }) => {
   const form = useFormContext();
+
   switch (step) {
     case "text":
       return (
@@ -30,6 +31,7 @@ const CurrentStep = ({ step = "text", isMinting = false }) => {
             <Button
               className="w-48"
               as={Link}
+              disabled={!form.formState.isValid}
               href={"?step=design"}
               color="gradient"
             >
@@ -77,10 +79,6 @@ const Design: NextPage = () => {
   return (
     <Layout>
       <Form
-        defaultValues={{
-          contributor: "chef.eth",
-          reason: "being such a great chef",
-        }}
         schema={Schema}
         onSubmit={async ({ contributor, contributorAddress, reason }) => {
           const description = gratitudeTemplate({ contributor, reason });

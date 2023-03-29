@@ -17,7 +17,7 @@ export type ComponentProps<C extends ElementType> = {
 // TODO: How to get props typings for the TV props (eg, color)?
 export const createComponent = (
   tag: string | ElementType,
-  variant: TVReturnType<any, any, TVSlots, TVSlots, string>
+  variant: TVReturnType<any, any, TVSlots, TVSlots, string, any>
 ) => {
   // eslint-disable-next-line react/display-name
   const Comp = forwardRef(

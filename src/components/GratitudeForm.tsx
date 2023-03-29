@@ -29,7 +29,10 @@ export const GratitudeForm = () => {
     const contributorAddress = isAddress(contributor) ? contributor : ens.data;
     setValue("contributorAddress", contributorAddress);
     setError("contributor", {
-      message: contributorAddress ? "" : "Invalid address or ENS not found",
+      message:
+        contributor?.length === 0 || contributorAddress
+          ? ""
+          : "Invalid address or ENS not found",
     });
   }, [ens.data, contributor]);
   return (

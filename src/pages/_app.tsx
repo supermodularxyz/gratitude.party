@@ -2,37 +2,26 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { Chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { optimism, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import "../styles/globals.css";
-import { contracts } from "config";
+import site from "config/site";
 
-const onlyWithAddress = (chain: Chain) =>
-  Object.entries(contracts?.[chain.id] || {}).every(
-    ([_, { address }]) => address
-  );
+const availableChains =
+  process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
 
-const { chains, provider } = configureChains(
-  [optimism, goerli].filter(onlyWithAddress),
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
-    publicProvider(),
-  ]
-);
+const { chains, provider } = configureChains(availableChains, [
+  alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
+  publicProvider(),
+]);
 
-const { connectors } = getDefaultWallets({
-  appName: "gratitude.party",
-  chains,
-});
+const { connectors } = getDefaultWallets({ appName: site.title, chains });
 
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-});
+const wagmiClient = createClient({ autoConnect: true, connectors, provider });
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <WagmiConfig client={wagmiClient}>

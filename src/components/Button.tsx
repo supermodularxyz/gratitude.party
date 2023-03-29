@@ -1,74 +1,30 @@
-import cx from "clsx";
-import { ElementType, forwardRef } from "react";
-import { Box, BoxProps, getProp, PolymorphicRef } from "./Box";
-import { Spinner } from "./Spinner";
+import { createComponent } from ".";
+import { tv } from "tailwind-variants";
 
-const config = {
+export const gradient = "from-[#FFA8A8] to-[#FFDE88]";
+
+const button = tv({
+  base: "inline-flex justify-center items-center tracking-wide active:opacity-90 hover:opacity-90 transition-colors cursor-pointer",
   variants: {
-    solid: {
-      indigo:
-        "text-indigo-50 bg-indigo-700 hover:bg-indigo-800 active:bg-indigo-800",
-      gray: "bg-gray-200  hover:bg-gray-300 active:bg-gray-100",
+    color: {
+      default: "bg-indigo-900 hover:bg-indigo-800 text-white",
+      twitter: "bg-sky-500 text-white",
+      ghost: "text-indigo-900 hover:bg-indigo-50",
+      gradient: `bg-gradient-to-r ${gradient} text-indigo-900`,
     },
-    ghost: {
-      primary: "",
-      gray: "hover:bg-gray-100",
+    size: {
+      sm: "p-2 text-sm",
+      md: "px-5 py-3 text-md",
     },
-    outline: {
-      indigo: "border-2 border-indigo-600 text-indigo-600",
-      gray: "border-2",
-      white: "border-2 border-white text-white hover:bg-gray-700",
+    disabled: {
+      true: "opacity-50 pointer-events-none",
     },
   },
-  sizes: {
-    xs: "text-xs py-1 px-3",
-    sm: "text-sm py-2 px-3",
-    md: "text-md py-2 px-5",
-    lg: "text-lg px-5 py-3",
-    xl: "text-xl py-3.5 px-6",
+  compoundVariants: [],
+  defaultVariants: {
+    size: "md",
+    color: "default",
   },
-};
+});
 
-const buttonClass =
-  "rounded inline-flex cursor-pointer items-center justify-center text-center font-medium transition-colors";
-
-export const Button = forwardRef(
-  <C extends ElementType>(
-    {
-      as = "button",
-      color = "gray",
-      size = "md",
-      rounded = "md",
-      variant = "solid",
-      className = "",
-      type = "button",
-      isLoading = false,
-      ...props
-    }: BoxProps<C>,
-    ref?: PolymorphicRef<C>
-  ) => {
-    return (
-      <Box
-        {...props}
-        as={as}
-        ref={ref}
-        type={type}
-        rounded={rounded}
-        disabled={isLoading}
-        className={cx(
-          buttonClass,
-          getProp(size, config.sizes),
-          getProp(
-            color,
-            config.variants[variant as "solid" | "ghost" | "outline"]
-          ),
-          { ["opacity-50"]: props.disabled },
-          { ["cursor-not-allowed"]: props.disabled },
-          className
-        )}
-      >
-        {isLoading ? <Spinner /> : props.children}
-      </Box>
-    );
-  }
-);
+export const Button = createComponent("button", button);

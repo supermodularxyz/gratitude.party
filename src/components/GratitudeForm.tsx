@@ -1,132 +1,61 @@
-import { Input } from "components/Form";
-import { useForm } from "react-hook-form";
-import { Button } from "components/Button";
-
-import { useMint } from "hooks/useMint";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import { useEnsAddress } from "wagmi";
-import { format } from "date-fns";
-import { storeMetadata, validateMetaData } from "@network-goods/hypercerts-sdk";
-import { ipfsClient } from "utils/ipfs";
-import { generateSVG } from "utils/svg";
-import { useRouter } from "next/router";
 import { isAddress } from "ethers/lib/utils.js";
 
-const formatDate = (date: Date) => format(date, "yyyy-MM-dd'T'HH:mm");
+import { FormControl, Input, Textarea } from "components/Form";
 
 const content = {
-  intro: "I would like to send my gratitude to:",
+  intro: "I would like to give thanks to",
 };
 
-const testValues = {
-  contributor: "test.eth",
-  reason: "helping",
-  time: "2023-01-01T01:00",
-};
+export const gratitudeTemplate = ({ contributor = "", reason = "" }) =>
+  `${content.intro} ${contributor} for ${reason}`;
 
-const calcTime = (d: Date) => [+d, +d, +d, +d].map((v) => v / 1000);
+const MAX_REASON_LENGTH = 144;
 
 export const GratitudeForm = () => {
-  const { register, handleSubmit, watch, formState, setError } = useForm({
-    // defaultValues: testValues,
-  });
-  const router = useRouter();
-
-  const mint = useMint((data) => router.push(`/tx/${data.hash}`));
+  const { watch, setError, setValue } = useFormContext();
 
   const contributor = watch("contributor");
+  const reason = watch("reason") || "";
+
   const ens = useEnsAddress({
     name: contributor,
     enabled: contributor?.length >= 3 && contributor.includes(".eth"),
   });
-  const isLoading = formState.isSubmitting;
-  console.log(formState.isValid);
+
+  useEffect(() => {
+    const contributorAddress = isAddress(contributor) ? contributor : ens.data;
+    setValue("contributorAddress", contributorAddress);
+    setError("contributor", {
+      message:
+        contributor?.length === 0 || contributorAddress
+          ? ""
+          : "Invalid address or ENS not found",
+    });
+  }, [ens.data, contributor]);
   return (
-    <form
-      className="text-lg text-gray-800"
-      onSubmit={handleSubmit(async ({ contributor, reason, time }) => {
-        const description = `${content.intro} ${contributor} for ${reason} at ${time}.`;
-        const name = "gratitude.party";
-
-        const contributorAddress = ens.data || contributor;
-        const [workTimeStart, workTimeEnd, impactTimeStart, impactTimeEnd] =
-          calcTime(new Date(time));
-
-        if (isAddress(contributor) || ens.data) {
-          const svg = await generateSVG({
-            contributor,
-            reason,
-            date: +new Date(time),
-          });
-
-          const claimData = {
-            name,
-            description,
-            image: `data:image/svg+xml;base64,${btoa(svg)}`,
-            ref: "",
-            properties: {
-              impactScopes: "gratitude.party",
-              workScopes: "gratitude.party",
-              impactTimeframe: [impactTimeStart, impactTimeEnd],
-              workTimeframe: [workTimeStart, workTimeEnd],
-              contributors: [contributorAddress],
-            },
-          };
-
-          if (validateMetaData(claimData)) {
-            const cid = await storeMetadata(claimData, ipfsClient);
-            return mint.write?.({
-              recklesslySetUnpreparedArgs: [1, cid],
-            });
-          } else {
-            console.log("Incorrect metadata");
-          }
-        } else {
-          setError("contributor", {
-            message: "Invalid address or ENS not found",
-          });
-        }
-      })}
-    >
-      <div className="text-center ">{content.intro}</div>
-
-      <Input
-        {...register("contributor", { required: true })}
-        required
-        autoFocus
-        className="w-full text-center"
-        placeholder="name.eth"
-      />
-
-      <div className="text-center">
-        for{" "}
+    <div className="text-lg text-indigo-900">
+      <FormControl label={content.intro} name="contributor">
         <Input
           required
-          {...register("reason", { required: true })}
-          className=""
-          placeholder="helping me out with"
-        />{" "}
-        at{" "}
-        <Input
-          {...register("time", { required: true })}
-          required
-          max={formatDate(new Date())}
-          className=""
-          type="datetime-local"
+          autoFocus
+          className="mb-4 w-full text-center"
+          placeholder="name.eth"
         />
+      </FormControl>
+      <FormControl label={"for "} name="reason">
+        <Textarea
+          maxLength={MAX_REASON_LENGTH}
+          rows={6}
+          required
+          placeholder="helping me out with"
+        />
+      </FormControl>
+      <div className="text-right text-gray-400">
+        {reason.length}/{MAX_REASON_LENGTH} characters
       </div>
-      <Button
-        isLoading={isLoading}
-        color="indigo"
-        className="mt-8 mb-2 w-full"
-        type="submit"
-        disabled={isLoading || !formState.isValid}
-      >
-        Generate
-      </Button>
-
-      <div className="text-sm text-red-600">
-        {formState.errors.contributor?.message as string}
-      </div>
-    </form>
+    </div>
   );
 };

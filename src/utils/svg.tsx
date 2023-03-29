@@ -1,18 +1,24 @@
 import satori from "satori";
-import { format } from "date-fns";
 
+import { config } from "components/HyperCertSVG";
 export const generateSVG = ({
-  contributor = "",
-  reason = "",
-  date = Date.now(),
-}) =>
-  fetch("/inter-latin-ext-400-normal.woff")
+  text = "",
+  color = ["red", "red"],
+  borderRadius = 32,
+  width = config.width,
+  height = config.height,
+}) => {
+  const [background, textColor] = color;
+  return fetch("/Monaco.ttf")
     .then((res) => res.arrayBuffer())
     .then((data) =>
       satori(
         <div
           style={{
-            background: "#3730a3",
+            background,
+            borderColor: textColor,
+            borderWidth: 2,
+            borderRadius,
             display: "flex",
             height: "100%",
             width: "100%",
@@ -20,41 +26,50 @@ export const generateSVG = ({
           }}
         >
           <div style={{ display: "flex", position: "relative" }}>
-            <img src="/svgPatterns/pattern-1.svg" style={{ zIndex: 10 }} />
-            <div
-              style={{
-                position: "absolute",
-                bottom: -46,
-                left: 14,
-                fontSize: 32,
-                color: "#c7d2fe",
-              }}
-            >
-              gratitude.party
-            </div>
+            <img
+              src="/svgPatterns/pattern-1.svg"
+              style={{ zIndex: 10, width: "100%" }}
+            />
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              padding: 16,
-              bottom: 0,
+              justifyContent: "center",
+              alignItems: "center",
+
+              height: "100%",
+              width: "100%",
               position: "absolute",
             }}
           >
-            <div style={{ fontSize: 20 }}>{contributor}</div>
-            <div style={{ fontSize: 30, marginBottom: 4 }}>{reason}</div>
-            <div style={{ fontSize: 20 }}>
-              {format(new Date(date), "yyyy-MM-dd")}
+            <div
+              style={{
+                color: textColor,
+                background,
+                borderColor: textColor,
+                borderWidth: 2,
+                borderRadius,
+                display: "flex",
+                textAlign: "center",
+                alignItems: "center",
+                fontSize: 24,
+                padding: 40,
+                height: 200,
+                width: 600,
+                lineHeight: "180%",
+              }}
+            >
+              {text}
             </div>
           </div>
         </div>,
         {
-          width: 550,
-          height: 850,
+          width,
+          height,
           fonts: [
             {
-              name: "Inter",
+              name: "Monaco",
               data,
               weight: 400,
               style: "normal",
@@ -63,3 +78,4 @@ export const generateSVG = ({
         }
       )
     );
+};

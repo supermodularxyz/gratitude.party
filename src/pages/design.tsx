@@ -104,12 +104,12 @@ const Design: NextPage = () => {
                 value: [workTimeStart as number, workTimeEnd as number],
               },
               contributors: {
-                value: [contributor],
+                value: [contributor, contributorAddress],
               },
             },
           };
 
-          mint.mutate({ address: contributorAddress, claimData });
+          mint.mutate(claimData);
         }}
       >
         <h1 className="mb-6 text-center text-4xl font-bold text-indigo-900">

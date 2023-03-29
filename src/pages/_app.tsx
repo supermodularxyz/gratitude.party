@@ -13,10 +13,13 @@ import site from "config/site";
 const availableChains =
   process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
 
-const { chains, provider } = configureChains(availableChains, [
-  alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
-  publicProvider(),
-]);
+const { chains, provider } = configureChains(
+  [optimism, goerli],
+  [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
+    publicProvider(),
+  ]
+);
 
 const { connectors } = getDefaultWallets({ appName: site.title, chains });
 

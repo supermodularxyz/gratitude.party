@@ -12,6 +12,7 @@
     "@fontsource/inter": "^4.5.15",
     "@hookform/resolvers": "^3.0.0",
     "@hypercerts-org/hypercerts-sdk": "^0.0.31",
+    "@radix-ui/react-tabs": "^1.0.3",
     "@rainbow-me/rainbowkit": "^0.12.2",
     "@wagmi/core": "^0.10.6",
     "clsx": "^1.2.1",

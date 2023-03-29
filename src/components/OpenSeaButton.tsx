@@ -11,7 +11,8 @@ export const OpenSeaButton = ({ tokenId = "" }) => {
   const { address } = useContractConfig("HypercertMinter");
   return (
     <Button
-      className="w-full"
+      color="gradient"
+      className="w-64"
       as={Link}
       target="_blank"
       href={createOpenSeaUrl(address, tokenId)}

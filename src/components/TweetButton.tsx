@@ -7,8 +7,9 @@ export const TweetButton = ({ text = "", tokenId = "" }) => {
   const { address } = useContractConfig("HypercertMinter");
   return (
     <Button
-      className="w-full"
+      className="w-64"
       as={Link}
+      color="twitter"
       target="_blank"
       href={`https://twitter.com/intent/tweet?text=${text}&url=${createOpenSeaUrl(
         address,

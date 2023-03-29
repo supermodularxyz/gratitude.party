@@ -6,6 +6,7 @@ import { useHypercert } from "hooks/useHypercert";
 import { OpenSeaButton } from "components/OpenSeaButton";
 import { TweetButton } from "components/TweetButton";
 import Image from "next/image";
+import { config } from "components/HyperCertSVG";
 
 const HyperCert: NextPage = () => {
   const router = useRouter();
@@ -18,14 +19,22 @@ const HyperCert: NextPage = () => {
 
   return (
     <Layout>
-      <div className="mb-4 h-auto w-full">
+      <div className="mb-16 h-auto w-full">
         {image ? (
-          <Image width={550} height={850} src={image} alt="Hypercert" />
+          <Image
+            width={config.width}
+            height={config.height}
+            src={image}
+            alt="Hypercert"
+          />
         ) : (
-          <div className="animate-pulse bg-gray-200" style={{ height: 544 }} />
+          <div
+            className="animate-pulse bg-gray-200"
+            style={{ height: config.height }}
+          />
         )}
       </div>
-      <div className="mb-4 flex flex-col gap-1">
+      <div className="flex flex-col items-center gap-1">
         <OpenSeaButton tokenId={tokenId} />
         <TweetButton text={description} tokenId={tokenId} />
       </div>

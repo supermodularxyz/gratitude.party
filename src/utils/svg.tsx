@@ -1,11 +1,12 @@
 import satori from "satori";
 
+import { config } from "components/HyperCertSVG";
 export const generateSVG = ({
   text = "",
   color = ["red", "red"],
   borderRadius = 32,
-  width = 100,
-  height = 100,
+  width = config.width,
+  height = config.height,
 }) => {
   const [background, textColor] = color;
   return fetch("/Monaco.ttf")

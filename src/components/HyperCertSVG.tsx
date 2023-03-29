@@ -10,6 +10,8 @@ type SVGProps = {
 const width = 232 * 4;
 const height = 150 * 4;
 
+export const config = { width, height };
+
 export const HyperCertSVG = (props: SVGProps) => {
   const [svg, setSvg] = useState("");
 

@@ -8,6 +8,7 @@ const button = tv({
   variants: {
     color: {
       default: "bg-indigo-900 hover:bg-indigo-800 text-white",
+      twitter: "bg-sky-500 text-white",
       ghost: "text-indigo-900 hover:bg-indigo-50",
       gradient: `bg-gradient-to-r ${gradient} text-indigo-900`,
     },

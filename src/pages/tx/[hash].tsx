@@ -3,14 +3,22 @@ import { Layout } from "layouts/Layout";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useWaitForTransaction } from "wagmi";
+import { useNetwork, useWaitForTransaction } from "wagmi";
 import { HypercertMinterABI } from "@hypercerts-org/hypercerts-sdk";
 import { Spinner } from "components/Spinner";
+import { Button } from "components/Button";
+import Link from "next/link";
 
+const createTxUrl = (hash: string, network: string) => {
+  const networkMap = { goerli: "goerli", optimism: "optimistic" };
+  const prefix = networkMap[network as keyof typeof networkMap];
+
+  return `https://${prefix}.etherscan.io/tx/${hash}`;
+};
 const MintingCert: NextPage = () => {
   const router = useRouter();
   const hash = router.query.hash as `0x${string}`;
-
+  const { chain } = useNetwork();
   const tx = useWaitForTransaction({ hash, enabled: !!hash });
 
   useEffect(() => {
@@ -30,9 +38,20 @@ const MintingCert: NextPage = () => {
 
   return (
     <Layout>
-      <div className="flex h-full flex-col items-center pt-24">
-        <div className="mb-4">Minting HyperCert</div>
+      <div className="flex h-full flex-col items-center sm:pt-32">
         <Spinner />
+        <div className="mb-16 pt-8 text-2xl font-bold italic text-indigo-900 sm:mb-32">
+          Minting...
+        </div>
+
+        <Button
+          as={Link}
+          href={createTxUrl(hash, chain?.network as string)}
+          target="_blank"
+          color="gradient"
+        >
+          View Transaction
+        </Button>
       </div>
     </Layout>
   );

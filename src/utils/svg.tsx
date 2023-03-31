@@ -4,6 +4,7 @@ import { config } from "components/HyperCertSVG";
 export const generateSVG = ({
   text = "",
   color = ["red", "red"],
+  shape = "1",
   borderRadius = 32,
   width = config.width,
   height = config.height,
@@ -27,7 +28,7 @@ export const generateSVG = ({
         >
           <div style={{ display: "flex", position: "relative" }}>
             <img
-              src="/svgPatterns/pattern-1.svg"
+              src={`/svgPatterns/pattern-${shape}.svg`}
               style={{ zIndex: 10, width: "100%" }}
             />
           </div>

@@ -66,7 +66,12 @@ export const Designer = ({ text = "" }) => {
               className={clsx(`bg-gradient-to-b ${gradient}`, {
                 ["opacity-50 hover:opacity-70"]: shape !== design.shape,
               })}
-            ></Circle>
+            >
+              <img
+                className="h-full w-full rounded-full object-cover"
+                src={`/svgPatterns/pattern-${shape}.svg`}
+              />
+            </Circle>
           ))}
         </div>
       </div>

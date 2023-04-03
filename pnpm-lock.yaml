@@ -4,6 +4,7 @@ specifiers:
   '@fontsource/inter': ^4.5.15
   '@hookform/resolvers': ^3.0.0
   '@hypercerts-org/hypercerts-sdk': ^0.0.31
+  '@lottiefiles/react-lottie-player': ^3.5.3
   '@radix-ui/react-tabs': ^1.0.3
   '@rainbow-me/rainbowkit': ^0.12.2
   '@types/node': ^18.15.5
@@ -39,6 +40,7 @@ dependencies:
   '@fontsource/inter': 4.5.15
   '@hookform/resolvers': 3.0.0_react-hook-form@7.43.8
   '@hypercerts-org/hypercerts-sdk': 0.0.31_z3vu5dg2hu3jqyh3anri5tms2q
+  '@lottiefiles/react-lottie-player': 3.5.3_react@18.2.0
   '@radix-ui/react-tabs': 1.0.3_biqbaboplfbrettd7655fr4n2y
   '@rainbow-me/rainbowkit': 0.12.4_mzrcgycl6u6ziy2o7grupiu4v4
   '@wagmi/core': 0.10.7_2hmzsa7fskjdbxeepnlfm3qg64
@@ -3650,6 +3652,15 @@ packages:
     resolution: {integrity: sha512-va15kYZr7KZNNPZdxONGQzpUr+4sxVu7V/VG7a8mRfPPXUyhEYj5RzXCQmGrlP3tAh0L3HHm5AjBMFYRqlM9SA==}
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.1.0
+    dev: false
+
+  /@lottiefiles/react-lottie-player/3.5.3_react@18.2.0:
+    resolution: {integrity: sha512-6pGbiTMjGnPddR1ur8M/TIDCiogZMc1aKIUbMEKXKAuNeYwZ2hvqwBJ+w5KRm88ccdcU88C2cGyLVsboFlSdVQ==}
+    peerDependencies:
+      react: 16 - 18
+    dependencies:
+      lottie-web: 5.10.2
+      react: 18.2.0
     dev: false
 
   /@metamask/safe-event-emitter/2.0.0:
@@ -10371,6 +10382,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /lottie-web/5.10.2:
+    resolution: {integrity: sha512-d0PFIGiwuMsJYaF4uPo+qG8dEorlI+xFI2zrrFtE1bGO4WoLIz+NjremxEq1swpR7juR10aeOtmNh3d6G3ub0A==}
+    dev: false
 
   /loupe/2.3.6:
     resolution: {integrity: sha512-RaPMZKiMy8/JruncMU5Bt6na1eftNoo++R4Y+N2FrxkDVTrGvcyzFTsaGif4QTeKESheMGegbhw6iUAq+5A8zA==}

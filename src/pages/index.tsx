@@ -8,8 +8,8 @@ import Link from "next/link";
 const Home: NextPage = () => {
   return (
     <LandingLayout>
-      <div className="md:flex">
-        <div className="flex flex-col justify-center">
+      <div className="gap-12 md:flex">
+        <div className="flex flex-col justify-center md:w-1/2">
           <h1 className="mb-8 text-5xl font-bold text-indigo-900">
             Express Gratitude to a Coworker
           </h1>
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
             </Button>
           </div>
         </div>
-        <div className="animate-pulse">
+        <div className="md:w-1/2">
           <Flare />
         </div>
       </div>

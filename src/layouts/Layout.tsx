@@ -62,6 +62,7 @@ export const LandingLayout = (props: PropsWithChildren) => {
           <div className="flex-1">{props.children}</div>
         </main>
         <Footer />
+        <BackgroundCurves />
       </div>
     </>
   );

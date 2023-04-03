@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import z from "zod";
 import { useFormContext } from "react-hook-form";
 
-import site from "config/site";
 import { Layout } from "layouts/Layout";
 import { Button } from "components/Button";
 import { Designer, useDesign } from "components/Designer";
@@ -12,6 +11,7 @@ import { Form } from "components/Form";
 import { GratitudeForm, gratitudeTemplate } from "components/GratitudeForm";
 import { useMintHypercert } from "hooks/useMint";
 import { generateSVG } from "utils/svg";
+import { createClaim } from "utils/createClaim";
 
 const Schema = z.object({
   contributor: z.string(),
@@ -63,7 +63,7 @@ const CurrentStep = ({ step = "text", isMinting = false }) => {
 
   return null;
 };
-const calcTime = (d: Date) => [+d, +d, +d, +d].map((v) => v / 1000);
+
 const headings = {
   text: "Express your gratitude",
   design: "Customize the design",
@@ -84,30 +84,12 @@ const Design: NextPage = () => {
           const description = gratitudeTemplate({ contributor, reason });
           const svg = await generateSVG({ text: description, ...design });
 
-          const [workTimeStart, workTimeEnd, impactTimeStart, impactTimeEnd] =
-            calcTime(new Date());
-
-          const claimData = {
-            name: site.title,
+          const claimData = createClaim({
             description,
-            external_url: `${global.location.origin}`,
-            image: `data:image/svg+xml;base64,${btoa(svg)}`,
-            ref: "",
-            properties: [],
-            hypercert: {
-              impact_scope: { value: [site.title] },
-              work_scope: { value: [site.title] },
-              impact_timeframe: {
-                value: [impactTimeStart as number, impactTimeEnd as number],
-              },
-              work_timeframe: {
-                value: [workTimeStart as number, workTimeEnd as number],
-              },
-              contributors: {
-                value: [contributor, contributorAddress],
-              },
-            },
-          };
+            svg,
+            contributor,
+            contributorAddress,
+          });
 
           mint.mutate(claimData);
         }}

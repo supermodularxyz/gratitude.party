@@ -4,10 +4,8 @@ import { PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 import { Button, gradient } from "./Button";
 import { HyperCertSVG } from "./HyperCertSVG";
-
 import { createGlobalState } from "react-use";
 
-// TODO: How to define these? pointers to public/svgPatterns/{pattern}.svg?
 const shapes = ["1", "2", "3", "4", "5", "6"];
 const colors = [
   ["#4a4c89", "#ffdc8a"],

@@ -13,12 +13,17 @@ const Home: NextPage = () => {
           <h1 className="mb-8 text-5xl font-bold text-indigo-900">
             Express Gratitude to a Coworker
           </h1>
-          <p className="mb-12 leading-8">
-            Scelerisque purus semper eget duis at tellus at. Nisl suscipit
-            adipiscing bibendum est ultricies. Tellus id interdum velit laoreet
-            id. Massa vitae tortor condimentum lacinia quis. Maecenas ultricies
-            mi eget mauris pharetra et. Urna nunc id cursus metus aliquam
-            eleifend mi in nulla. Eu non diam phasellus vestibulum.
+          <p className="mb-12 text-xl leading-8">
+            Gratitude is the lifeblood of a regenerative team culture. If you
+            your coworker did something great, mint them a gratitude{" "}
+            <a
+              className="text-indigo-500 hover:text-indigo-800"
+              href={"https://hypercerts.xyz"}
+              target="_blank"
+            >
+              hypercert
+            </a>{" "}
+            to show your appreciation for their work!
           </p>
           <div className="flex justify-center md:justify-start">
             <Button color="gradient" as={Link} href={"/design"}>

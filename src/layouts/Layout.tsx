@@ -10,9 +10,17 @@ import site from "config/site";
 
 const Footer = () => (
   <footer className="container mx-auto max-w-screen-lg p-4 text-xs">
-    {
-      "made with <3 at supermodular.xyz | we are building a more regerative internet | learn more"
-    }
+    <span>
+      made with &lt;3 at supermodular.xyz | we are building a more regerative
+      internet |{" "}
+    </span>
+    <a
+      className="text-indigo-500"
+      href={`https://supermodular.xyz`}
+      target="_blank"
+    >
+      learn more
+    </a>
   </footer>
 );
 

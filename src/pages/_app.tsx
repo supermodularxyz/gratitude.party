@@ -9,6 +9,7 @@ import { publicProvider } from "wagmi/providers/public";
 
 import "../styles/globals.css";
 import site from "config/site";
+import { NextSeo } from "next-seo";
 
 const availableChains =
   process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
@@ -25,13 +26,42 @@ const { connectors } = getDefaultWallets({ appName: site.title, chains });
 
 const wagmiClient = createClient({ autoConnect: true, connectors, provider });
 
+const { title, description, url } = site;
+const imageUrl = `${url}/og.png`;
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />{" "}
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <>
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={url}
+        openGraph={{
+          url,
+          title,
+          description,
+          images: [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: title,
+              type: "image/png",
+            },
+          ],
+          siteName: title,
+        }}
+        twitter={{
+          handle: "@supermodularxyz",
+          site: "@supermodularxyz",
+          cardType: "summary_large_image",
+        }}
+      />
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />{" "}
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </>
   );
 };
 

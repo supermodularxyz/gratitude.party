@@ -15,6 +15,7 @@ const Footer = () => (
     }
   </footer>
 );
+
 export const Layout = (props: PropsWithChildren) => {
   return (
     <>

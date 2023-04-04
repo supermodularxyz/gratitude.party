@@ -1,5 +1,5 @@
 export default {
   title: "GiveGratitude.io",
-  description: "",
+  description: "Express Gratitude to a Coworker",
   url: "https://givegratitude.io",
 };

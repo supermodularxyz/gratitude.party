@@ -21,6 +21,7 @@ specifiers:
   eslint-config-next: 13.1.6
   ethers: ^5.7.2
   next: 13.2.4
+  next-seo: ^6.0.0
   nft.storage: ^7.0.3
   postcss: ^8.4.21
   prettier: ^2.8.6
@@ -48,6 +49,7 @@ dependencies:
   date-fns: 2.29.3
   ethers: 5.7.2
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
+  next-seo: 6.0.0_ld2jel3hspngo3u5lti2kgl2sq
   nft.storage: 7.0.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -10810,6 +10812,18 @@ packages:
   /netmask/2.0.2:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
+    dev: false
+
+  /next-seo/6.0.0_ld2jel3hspngo3u5lti2kgl2sq:
+    resolution: {integrity: sha512-jKKt1p1z4otMA28AyeoAONixVjdYmgFCWwpEFtu+DwRHQDllVX3RjtyXbuCQiUZEfQ9rFPBpAI90vDeLZlMBdg==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 13.2.4_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next/13.2.4_biqbaboplfbrettd7655fr4n2y:

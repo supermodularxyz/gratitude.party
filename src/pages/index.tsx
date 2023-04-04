@@ -14,8 +14,8 @@ const Home: NextPage = () => {
             Express Gratitude to a Coworker
           </h1>
           <p className="mb-12 text-xl leading-8">
-            Gratitude is the lifeblood of a regenerative team culture. If you
-            your coworker did something great, mint them a gratitude{" "}
+            Gratitude is the lifeblood of a regenerative team culture. If your
+            coworker did something great, mint them a gratitude{" "}
             <a
               className="text-indigo-500 hover:text-indigo-800"
               href={"https://hypercerts.xyz"}

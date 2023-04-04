@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { useEnsAddress } from "wagmi";
 import { isAddress } from "ethers/lib/utils.js";
 
 import { FormControl, Input, Textarea } from "components/Form";
+import { useEnsAddress } from "hooks/useENS";
 
 const content = {
   intro: "I would like to give thanks to",
@@ -20,10 +20,9 @@ export const GratitudeForm = () => {
   const contributor = watch("contributor");
   const reason = watch("reason") || "";
 
-  const ens = useEnsAddress({
-    name: contributor,
-    enabled: contributor?.length >= 3 && contributor.includes(".eth"),
-  });
+  const ens = useEnsAddress(contributor);
+
+  console.log(ens.data, ens.error);
 
   useEffect(() => {
     const contributorAddress = isAddress(contributor) ? contributor : ens.data;

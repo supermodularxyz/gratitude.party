@@ -11,7 +11,7 @@ import site from "config/site";
 const Footer = () => (
   <footer className="container mx-auto max-w-screen-lg p-4 text-xs">
     <span>
-      made with &lt;3 at supermodular.xyz | we are building a more regerative
+      made with &lt;3 at supermodular.xyz | we are building a more regenerative
       internet |{" "}
     </span>
     <a

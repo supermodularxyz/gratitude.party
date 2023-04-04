@@ -1,8 +1,10 @@
 import satori from "satori";
 
 import { config } from "components/HyperCertSVG";
+import { content } from "components/GratitudeForm";
 export const generateSVG = ({
-  text = "",
+  contributor = "",
+  reason = "",
   color = ["red", "red"],
   shape = "1",
   borderRadius = 32,
@@ -52,6 +54,7 @@ export const generateSVG = ({
                 borderWidth: 2,
                 borderRadius,
                 display: "flex",
+                flexDirection: "column",
                 textAlign: "center",
                 alignItems: "center",
                 fontSize: 24,
@@ -61,7 +64,11 @@ export const generateSVG = ({
                 lineHeight: "180%",
               }}
             >
-              {text}
+              <span>{content.intro}</span>
+              <span style={{ fontSize: contributor.length > 40 ? 22 : 24 }}>
+                {contributor}
+              </span>
+              <span>{reason}</span>
             </div>
           </div>
         </div>,

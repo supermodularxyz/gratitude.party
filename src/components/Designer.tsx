@@ -32,7 +32,7 @@ export const useDesign = () => {
       setState((s) => ({ ...s, shape: shapes[i] as any })),
   };
 };
-export const Designer = ({ text = "" }) => {
+export const Designer = ({ contributor = "", reason = "" }) => {
   const design = useDesign();
 
   return (
@@ -74,7 +74,12 @@ export const Designer = ({ text = "" }) => {
         </div>
       </div>
       <div className="min-h-96 mb-16">
-        <HyperCertSVG color={design.color} shape={design.shape} text={text} />
+        <HyperCertSVG
+          color={design.color}
+          shape={design.shape}
+          contributor={contributor}
+          reason={reason}
+        />
       </div>
     </>
   );

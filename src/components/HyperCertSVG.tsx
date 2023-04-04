@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { generateSVG } from "utils/svg";
 
 type SVGProps = {
-  text: string;
+  contributor: string;
+  reason: string;
   color: string[];
   shape: string;
 };

@@ -43,7 +43,7 @@ const CurrentStep = ({ step = "text", isMinting = false }) => {
     case "design":
       return (
         <>
-          <Designer text={gratitudeTemplate(form.watch())} />
+          <Designer {...form.watch()} />
           <div className="flex justify-between">
             <Button as={Link} href={"?step=text"} color="ghost">
               Back
@@ -82,7 +82,11 @@ const Design: NextPage = () => {
         schema={Schema}
         onSubmit={async ({ contributor, contributorAddress, reason }) => {
           const description = gratitudeTemplate({ contributor, reason });
-          const svg = await generateSVG({ text: description, ...design });
+          const svg = await generateSVG({
+            contributor,
+            reason,
+            ...design,
+          });
 
           const claimData = createClaim({
             description,

@@ -68,7 +68,7 @@ export const generateSVG = ({
               <span style={{ fontSize: contributor.length > 40 ? 22 : 24 }}>
                 {contributor}
               </span>
-              <span>{reason}</span>
+              <span>for {reason}</span>
             </div>
           </div>
         </div>,

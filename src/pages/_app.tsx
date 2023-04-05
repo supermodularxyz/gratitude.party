@@ -16,7 +16,7 @@ const availableChains =
   process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
 
 const { chains, provider } = configureChains(
-  [goerli],
+  [optimism, goerli],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
     publicProvider(),

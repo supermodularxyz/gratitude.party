@@ -16,9 +16,7 @@ export const createClaim = ({
   return {
     name: site.title,
     description,
-    external_url: ``,
     version: "0.0.1",
-    // external_url: `${global.location.origin}`,
     image: `data:image/svg+xml;base64,${btoa(svg)}`,
     properties: [],
     hypercert: {

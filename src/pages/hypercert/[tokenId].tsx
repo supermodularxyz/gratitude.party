@@ -15,6 +15,8 @@ const HyperCert: NextPage = () => {
   const tokenId = claimId?.split("-")[1];
   const cert = useHypercert(claimId);
 
+  if (!cert) return null;
+
   const { image, description } = cert.data?.metadata || {};
 
   return (

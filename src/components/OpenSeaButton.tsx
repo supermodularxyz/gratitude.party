@@ -18,7 +18,6 @@ export const createOpenSeaUrl = (
   }/${contractAddress}/${tokenId}`;
 
 export const OpenSeaButton = ({ tokenId = "" }) => {
-  return null;
   const { address } = useContractConfig("HypercertMinter");
   const { chain } = useNetwork();
   if (!chain?.id) return null;

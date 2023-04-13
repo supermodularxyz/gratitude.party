@@ -95,7 +95,7 @@ const Design: NextPage = () => {
             contributorAddress,
           });
 
-          mint.mutate(claimData);
+          mint.mutate({ contributor: contributorAddress, claimData });
         }}
       >
         <h1 className="mb-6 text-center text-4xl font-bold text-indigo-900">

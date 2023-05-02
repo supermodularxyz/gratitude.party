@@ -75,7 +75,6 @@ const Design: NextPage = () => {
   const step = router.query.step as string;
 
   const mint = useMintHypercert((data) => router.push(`/tx/${data.hash}`));
-
   return (
     <Layout>
       <Form
@@ -106,6 +105,9 @@ const Design: NextPage = () => {
           isMinting={mint.isLoading}
         />
       </Form>
+      <div className="pt-4 font-mono text-sm text-red-600">
+        {(mint.error as any)?.message}
+      </div>
     </Layout>
   );
 };

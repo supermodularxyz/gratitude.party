@@ -11,8 +11,8 @@ export const useMintHypercert = (
   onSuccess: (data: ContractTransaction) => void
 ) => {
   const { chain } = useNetwork();
-  const { data: signer } = useSigner();
   const { address } = useAccount();
+  const { data: signer } = useSigner();
   const { address: contractAddress } = useContractConfig("HypercertMinter");
 
   return useMutation(
@@ -25,6 +25,7 @@ export const useMintHypercert = (
     }): Promise<any> => {
       if (!chain) return null;
 
+      console.log({ contributor, claimData });
       const rpc = chain?.rpcUrls.default.http[0];
 
       const { mintHypercert, transferRestrictions } = HypercertMinting({
@@ -33,7 +34,7 @@ export const useMintHypercert = (
       });
 
       return mintHypercert(
-        contributor,
+        address as Address,
         claimData,
         1,
         transferRestrictions.AllowAll

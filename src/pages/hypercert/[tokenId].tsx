@@ -18,7 +18,6 @@ const HyperCert: NextPage = () => {
   if (!cert) return null;
 
   const { image, description } = cert.data?.metadata || {};
-
   return (
     <Layout>
       <div className="mb-16 h-auto w-full">

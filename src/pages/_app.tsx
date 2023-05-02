@@ -61,7 +61,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <QueryClientProvider client={queryClient}>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
-            <Component {...pageProps} />{" "}
+            <Component {...pageProps} />
           </RainbowKitProvider>
         </WagmiConfig>
       </QueryClientProvider>

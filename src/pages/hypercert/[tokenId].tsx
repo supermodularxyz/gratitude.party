@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Layout } from "layouts/Layout";
 import { useRouter } from "next/router";
 
-import { useHypercert } from "hooks/useHypercert";
+import { useHypercert } from "hooks/deprecated / useHypercert";
 import { OpenSeaButton } from "components/OpenSeaButton";
 import { TweetButton } from "components/TweetButton";
 import Image from "next/image";

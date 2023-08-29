@@ -1,4 +1,4 @@
-import { useContractConfig } from "hooks/useContractConfig";
+import { useContractConfig } from "hooks/deprecated /not required /useContractConfig";
 import Link from "next/link";
 import { useNetwork } from "wagmi";
 import { Button } from "./Button";

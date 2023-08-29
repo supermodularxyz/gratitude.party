@@ -1,3 +1,5 @@
+// not required I believe
+
 import { useNetwork } from "wagmi";
 
 import type { ContractType } from "config/contracts";

@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { isAddress } from "ethers/lib/utils.js";
 
 import { FormControl, Input, Textarea } from "components/Form";
-import { useEnsAddress } from "hooks/useENS";
+import { useEnsAddress } from "hooks/deprecated /not required / useENS";
 
 export const content = {
   intro: "I would like to give thanks to",

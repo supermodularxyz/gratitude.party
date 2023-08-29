@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { providers } from "ethers";
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_ID as string;

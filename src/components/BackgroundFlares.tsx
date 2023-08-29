@@ -19,8 +19,8 @@ export const BackgroundFlares = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(984.403 135.538) rotate(46.3916) scale(130.087)"
       >
-        <stop stop-color="#FFBC11" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop stopColor="#FFBC11" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </radialGradient>
       <radialGradient
         id="paint1_radial_0_1"
@@ -30,8 +30,8 @@ export const BackgroundFlares = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(15.4099 776.713) rotate(46.3916) scale(293.419)"
       >
-        <stop stop-color="#FFBC11" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop stopColor="#FFBC11" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </radialGradient>
       <radialGradient
         id="paint2_radial_0_1"
@@ -41,8 +41,8 @@ export const BackgroundFlares = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(1230.28 588.378) rotate(46.3916) scale(91.5428)"
       >
-        <stop stop-color="#FFBC11" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop stopColor="#FFBC11" />
+        <stop offset="1" stopColor="white" stopOpacity="0" />
       </radialGradient>
     </defs>
   </svg>

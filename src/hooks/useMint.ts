@@ -1,44 +1,73 @@
-import { ContractTransaction } from "ethers";
-import { Address, useAccount, useMutation, useNetwork, useSigner } from "wagmi";
-import {
-  HypercertMinting,
-  HypercertMetadata,
-} from "@hypercerts-org/hypercerts-sdk";
+import type { HypercertMetadata } from "@hypercerts-org/sdk";
+import { TransferRestrictions } from "@hypercerts-org/sdk";
+import { useQuery } from "wagmi";
+import hyperCertClient from "./useHypercert";
+import type { QueryKey } from "@tanstack/react-query";
 
-import { useContractConfig } from "./useContractConfig";
-
-export const useMintHypercert = (
-  onSuccess: (data: ContractTransaction) => void
-) => {
-  const { chain } = useNetwork();
-  const { address } = useAccount();
-  const { data: signer } = useSigner();
-  const { address: contractAddress } = useContractConfig("HypercertMinter");
-
-  return useMutation(
-    async ({
-      contributor,
-      claimData,
-    }: {
-      contributor: string;
-      claimData: HypercertMetadata;
-    }): Promise<any> => {
-      if (!chain) return null;
-
-      console.log({ contributor, claimData });
-      const rpc = chain?.rpcUrls.default.http[0];
-
-      const { mintHypercert, transferRestrictions } = HypercertMinting({
-        provider: signer as any,
-        chainConfig: { chainID: String(chain.id), contractAddress, rpc } as any,
-      });
-
-      return mintHypercert(
-        address as Address,
-        claimData,
-        1,
-        transferRestrictions.AllowAll
-      ).then(onSuccess);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const metadata: HypercertMetadata = {
+  "name": "Rainforest Preservation Token",
+  "description": "An ERC1155 token representing impact and work in the area of rainforest preservation.",
+  "external_url": "https://rainforest-token.org",
+  "image": "https://rainforest-token.org/token-image.png",
+  "version": "1.0",
+  "ref": "RFPT:123",
+  "allowList": "QmWgWZX6A5MvTsnSuVPjbsNhH95PAjE46tMBdSURBrZjSQ",
+  "properties": [
+    {
+      "trait_type": "Environmental",
+      "value": "Rainforest Conservation"
     }
-  );
-};
+  ],
+  "hypercert": {
+    "impact_scope": {
+      "name": "Biome",
+      "value": ["Rainforest"],
+      "display_value": "Rainforest"
+    },
+    "work_scope": {
+      "name": "Conservation Activity",
+      "value": ["Tree planting", "Wildlife protection"],
+      "display_value": "Tree planting, Wildlife protection"
+    },
+    "work_timeframe": {
+      "name": "Year",
+      "value": [1672444800, 1703980800],
+      "display_value": "2023-2024"
+    },
+    "impact_timeframe": {
+      "name": "Year",
+      "value": [1703980800, 1735516800],
+      "display_value": "2024-2025"
+    },
+    "contributors": {
+      "name": "Contributors",
+      "value": ["Organization A", "Organization B"],
+      "display_value": "Organization A, Organization B"
+    },
+    "rights": {
+      "name": "Token holder benefits",
+      "value": ["Voting rights", "Dividends"],
+      "display_value": "Voting rights, Dividends"
+    }
+  }
+}
+
+
+
+
+
+const totalUnits = "10000";
+
+const useMint = (metadata: HypercertMetadata) => {
+
+  return useQuery('hypercerts' as unknown as QueryKey, () => hyperCertClient.mintClaim(
+    metadata,
+    totalUnits,
+    TransferRestrictions.FromCreatorOnly,
+
+  ))
+} 
+
+
+export default useMint;

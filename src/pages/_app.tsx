@@ -2,7 +2,7 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { optimism, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -15,17 +15,17 @@ import { NextSeo } from "next-seo";
 const availableChains =
   process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
 
-const { chains, provider } = configureChains(
-  [optimism, goerli],
+const { chains, publicClient } = configureChains(
+  [...availableChains],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
     publicProvider(),
   ]
 );
 
-const { connectors } = getDefaultWallets({ appName: site.title, chains });
+const { connectors } = getDefaultWallets({ appName: site.title, chains, projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID as string });
 
-const wagmiClient = createClient({ autoConnect: true, connectors, provider });
+const wagmiClient = createConfig({ autoConnect: true, connectors, publicClient });
 const queryClient = new QueryClient();
 
 const { title, description, url } = site;
@@ -59,7 +59,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         }}
       />
       <QueryClientProvider client={queryClient}>
-        <WagmiConfig client={wagmiClient}>
+        <WagmiConfig config={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <Component {...pageProps} />
           </RainbowKitProvider>

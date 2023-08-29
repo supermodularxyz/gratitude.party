@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useNetwork, useWaitForTransaction } from "wagmi";
-import { HypercertMinterABI } from "@hypercerts-org/hypercerts-sdk";
+import { HypercertMinterABI } from "@hypercerts-org/sdk";
 import { Spinner } from "components/Spinner";
 import { Button } from "components/Button";
 import Link from "next/link";

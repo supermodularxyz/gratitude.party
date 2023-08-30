@@ -1,12 +1,12 @@
 import { HypercertClient } from "@hypercerts-org/sdk";
 import { ethers } from "ethers";
-import { optimism, goerli } from "wagmi/dist/chains";
+import { optimism, goerli } from "@wagmi/core/chains";
 
 const chain = process.env.NEXT_PUBLIC_ENV as string === "production" ? optimism : goerli;
 
 // NOTE: you should replace this with your own JSON-RPC provider to the network
 // This should have signing abilities and match the `chainId` passed into HypercertClient
-const operator = ethers.providers.getDefaultProvider(chain.name);
+const operator = ethers.providers.getDefaultProvider(chain.id);
 
 
 const tokens = {

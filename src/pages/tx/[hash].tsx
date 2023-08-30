@@ -40,7 +40,7 @@ const MintingCert: NextPage = () => {
     <Layout>
       <div className="flex h-full flex-col items-center sm:pt-32">
         <Spinner />
-        <div className="mb-16 pt-8 text-2xl font-bold italic text-indigo-900 sm:mb-32">
+        <div className="mb-16 pt-8 text-2xl font-bold italic text-green-900 sm:mb-32">
           Minting...
         </div>
 

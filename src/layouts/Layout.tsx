@@ -15,7 +15,7 @@ const Footer = () => (
       internet |{" "}
     </span>
     <a
-      className="text-indigo-500"
+      className="text-green-500"
       href={`https://supermodular.xyz`}
       target="_blank"
     >
@@ -35,7 +35,7 @@ export const Layout = (props: PropsWithChildren) => {
 
       <div className="flex min-h-screen flex-col justify-center">
         <div className="flex items-center justify-between p-6">
-          <Link href={"/"} className="text-lg font-bold text-indigo-900">
+          <Link href={"/"} className="text-lg font-bold text-green-900">
             {site.title}
           </Link>
           <ConnectWalletButton />
@@ -62,7 +62,7 @@ export const LandingLayout = (props: PropsWithChildren) => {
 
       <div className="flex min-h-screen flex-col justify-center">
         <div className="flex items-center justify-between p-6">
-          <Link href={"/"} className="text-lg font-bold text-indigo-900">
+          <Link href={"/"} className="text-lg font-bold text-green-900">
             {site.title}
           </Link>
           <ConnectWalletButton />

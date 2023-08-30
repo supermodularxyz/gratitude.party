@@ -1,4 +1,4 @@
-# gratitude.party
+# Greenpill.network
 
 Exploring Hypercerts.
 

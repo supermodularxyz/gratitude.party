@@ -1,30 +1,26 @@
-import {
-  cloneElement,
+import type {
   ComponentPropsWithoutRef,
   PropsWithChildren,
   ReactElement,
 } from "react";
-import {
-  FormProvider,
-  UseFormProps,
-  useFormContext,
-  useForm,
-} from "react-hook-form";
+import { cloneElement } from "react";
+import type { UseFormProps } from "react-hook-form";
+import { FormProvider, useFormContext, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { tv } from "tailwind-variants";
-import { z } from "zod";
+import type { z } from "zod";
 import clsx from "clsx";
 
 import { createComponent } from ".";
 
 const input = tv({
-  base: "block w-full p-2 border border-gray-200 focus:outline-indigo-500 bg-white",
+  base: "block w-full p-2 border border-gray-200 text-left focus:outline-green-500 bg-white",
 });
 const textarea = tv({
-  base: "rounded block w-full resize-none rounded border border-gray-200 bg-transparent p-2 focus:outline-indigo-500 bg-white",
+  base: "rounded block w-full resize-none rounded border border-gray-200 text-left bg-transparent p-2 focus:outline-green-500 bg-white",
 });
 const label = tv({
-  base: "text-xl text-indigo-900 text-center block mb-1",
+  base: "text-sm py-1 text-green-900 text-left  block mb-1",
 });
 
 export const Input = createComponent("input", input);
@@ -49,7 +45,7 @@ export const FormControl = ({
 
   const error = errors[name];
   return (
-    <fieldset className={clsx("mb-2 flex-1", className)}>
+    <fieldset className={clsx("mb-2 flex-1 items-start", className)}>
       <Label htmlFor={name}>{label}</Label>
       {cloneElement(children as ReactElement, { id: name, ...register(name) })}
       {hint ? <div className="pt-1 text-xs text-gray-500">{hint}</div> : null}
@@ -61,6 +57,49 @@ export const FormControl = ({
     </fieldset>
   );
 };
+
+interface DateRangeInputProps {
+  nameStart: string;
+  nameEnd: string;
+  labelStart: string;
+  labelEnd: string;
+  className?: string;
+  hintStart?: string;
+  hintEnd?: string;
+}
+
+export const DateRangeInput = ({
+  nameStart,
+  nameEnd,
+  labelStart,
+  labelEnd,
+  className,
+  hintStart,
+  hintEnd,
+}: DateRangeInputProps): ReactElement => {
+  return (
+    <div className="p-4  border-green-100 border">
+      <FormControl
+        name={nameStart}
+        label={labelStart}
+        className={className}
+        hint={hintStart}
+      >
+        <Input type="date" />
+      </FormControl>
+      <FormControl
+        name={nameEnd}
+        label={labelEnd}
+        className={className}
+        hint={hintEnd}
+      >
+        <Input type="date" />
+      </FormControl>
+    </div>
+  );
+};
+
+
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends PropsWithChildren {

@@ -7,10 +7,10 @@ const button = tv({
   base: "inline-flex justify-center items-center tracking-wide active:opacity-90 hover:opacity-90 transition-colors cursor-pointer",
   variants: {
     color: {
-      default: "bg-indigo-900 hover:bg-indigo-800 text-white",
+      default: "bg-green-900 hover:bg-green-800 text-white",
       twitter: "bg-sky-500 text-white",
-      ghost: "text-indigo-900 hover:bg-indigo-50",
-      gradient: `bg-gradient-to-r ${gradient} text-indigo-900`,
+      ghost: "text-green-900 hover:bg-green-50",
+      gradient: `bg-gradient-to-r ${gradient} text-green-900`,
     },
     size: {
       sm: "p-2 text-sm",

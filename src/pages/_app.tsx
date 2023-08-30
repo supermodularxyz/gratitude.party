@@ -1,16 +1,18 @@
-import { type AppType } from "next/dist/shared/lib/utils";
 import "@rainbow-me/rainbowkit/styles.css";
+import { type AppType } from "next/dist/shared/lib/utils";
 
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { PrivyProvider, User } from '@privy-io/react-auth';
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { optimism, goerli } from "wagmi/chains";
+import { goerli, optimism } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import "../styles/globals.css";
+
 import site from "config/site";
 import { NextSeo } from "next-seo";
+import "../styles/globals.css";
 
 const availableChains =
   process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
@@ -22,6 +24,10 @@ const { chains, publicClient } = configureChains(
     publicProvider(),
   ]
 );
+const handleLogin = (user: User) => {
+  console.log(`User ${user?.id} logged in!`)
+}
+
 
 const { connectors } = getDefaultWallets({ appName: site.title, chains, projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID as string });
 
@@ -31,6 +37,7 @@ const queryClient = new QueryClient();
 const { title, description, url } = site;
 const imageUrl = `${url}/og.png`;
 const MyApp: AppType = ({ Component, pageProps }) => {
+  
   return (
     <>
       <NextSeo
@@ -60,9 +67,22 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       />
       <QueryClientProvider client={queryClient}>
         <WagmiConfig config={wagmiClient}>
-          <RainbowKitProvider chains={chains}>
+          
+          <PrivyProvider
+        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
+        onSuccess={handleLogin}
+        config={{
+          loginMethods: ['email', 'wallet'],
+          appearance: {
+            theme: 'light',
+            accentColor: '#676FFF',
+            logo: 'https://your-logo-url',
+          },
+        }}
+      >
             <Component {...pageProps} />
-          </RainbowKitProvider>
+            </PrivyProvider>
+          
         </WagmiConfig>
       </QueryClientProvider>
     </>

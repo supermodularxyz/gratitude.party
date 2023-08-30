@@ -1,11 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
-
+import { usePrivy } from '@privy-io/react-auth';
 import { BackgroundCurves } from "components/BackgroundCurves";
 import { BackgroundFlares } from "components/BackgroundFlares";
-import { ConnectWalletButton } from "components/ConnectWalletButton";
-
+import { Button } from "components/Button";
 import site from "config/site";
 
 const Footer = () => (
@@ -38,7 +37,7 @@ export const Layout = (props: PropsWithChildren) => {
           <Link href={"/"} className="text-lg font-bold text-green-900">
             {site.title}
           </Link>
-          <ConnectWalletButton />
+          <ConnectButton />
         </div>
         <main className="container relative mx-auto flex max-w-screen-sm flex-1 flex-col p-4 text-gray-900">
           <div className="flex-1">{props.children}</div>
@@ -52,6 +51,7 @@ export const Layout = (props: PropsWithChildren) => {
 };
 
 export const LandingLayout = (props: PropsWithChildren) => {
+  
   return (
     <>
       <Head>
@@ -65,7 +65,9 @@ export const LandingLayout = (props: PropsWithChildren) => {
           <Link href={"/"} className="text-lg font-bold text-green-900">
             {site.title}
           </Link>
-          <ConnectWalletButton />
+          
+          <PrivyAuthButton />
+          
         </div>
         <main className="container relative mx-auto flex max-w-screen-xl flex-1 flex-col p-4 text-gray-900">
           <div className="flex-1">{props.children}</div>
@@ -76,3 +78,17 @@ export const LandingLayout = (props: PropsWithChildren) => {
     </>
   );
 };
+
+
+
+function PrivyAuthButton() {
+  const { login, ready, authenticated, user, logout } = usePrivy()
+
+  if(!ready) return <div>Loading...</div>
+
+  if(authenticated) 
+  return <Button onClick={logout}>Logged in as {user?.wallet?.address}</Button>
+
+  if(ready && !authenticated)
+  return <Button onClick={login}>Log in</Button>;
+}

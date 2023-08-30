@@ -2,16 +2,16 @@ import { type NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import z from "zod";
-import { useFormContext } from "react-hook-form";
+// import { useFormContext } from "react-hook-form";
 
-import { Layout } from "layouts/Layout";
-import { Button } from "components/Button";
+import { Layout } from "../layouts/Layout";
+import { Button } from "../components/Button";
 // import { Designer } from "components/Designer";
-import { Form } from "components/Form";
-import { GreenPillForm } from "components/GreenPillForm";
-import useMint from "hooks/useMint";
-import { generateSVG } from "utils/svg";
-import { createClaim } from "utils/createClaim";
+import { Form } from "../components/Form";
+import { GreenPillForm } from "../components/GreenPillForm";
+import { generateSVG } from "../utils/svg";
+import { createClaim } from "../utils/createClaim";
+import React from "react";
 
 const Schema = z.object({
   contributor: z.string(),
@@ -20,7 +20,7 @@ const Schema = z.object({
 });
 
 const CurrentStep = ({ step = "text", isMinting = false }) => {
-  const form = useFormContext();
+  // const form = useFormContext();
 
   switch (step) {
     case "text":
@@ -78,7 +78,7 @@ const Design: NextPage = () => {
   return (
     <Layout>
       <Form
-        schema={Schema}
+        schema={Schema as never}
         onSubmit={async ({ contributor, contributorAddress, reason }) => {
           // const description = gratitudeTemplate({ contributor, reason });
           const svg = await generateSVG({
@@ -87,6 +87,7 @@ const Design: NextPage = () => {
             // ...design,
           });
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const claimData = createClaim({
             // description,
             svg,

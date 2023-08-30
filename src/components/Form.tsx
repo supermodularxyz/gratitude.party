@@ -12,6 +12,7 @@ import type { z } from "zod";
 import clsx from "clsx";
 
 import { createComponent } from ".";
+import React from "react";
 
 const input = tv({
   base: "block w-full p-2 border border-gray-200 text-left focus:outline-green-500 bg-white",
@@ -23,9 +24,9 @@ const label = tv({
   base: "text-sm py-1 text-green-900 text-left  block mb-1",
 });
 
-export const Input = createComponent("input", input);
-export const Textarea = createComponent("textarea", textarea);
-export const Label = createComponent("label", label);
+export const Input = createComponent("input", input as never);
+export const Textarea = createComponent("textarea", textarea as never);
+export const Label = createComponent("label", label as never);
 
 export const FormControl = ({
   name,
@@ -101,14 +102,14 @@ export const DateRangeInput = ({
 
 
 
-export interface FormProps<S extends z.ZodType<any, any>>
+export interface FormProps<S extends z.ZodType<never, never>>
   extends PropsWithChildren {
   defaultValues?: UseFormProps<z.infer<S>>["defaultValues"];
   schema: S;
   onSubmit: (values: z.infer<S>) => void;
 }
 
-export function Form<S extends z.ZodType<any, any>>({
+export function Form<S extends z.ZodType<never, never>>({
   defaultValues,
   schema,
   children,

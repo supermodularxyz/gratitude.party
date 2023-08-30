@@ -1,7 +1,7 @@
 import satori from "satori";
-
-import { config } from "components/HyperCertSVG";
-import { content } from "components/GreenPillForm";
+import React from "react";
+import { config } from "../components/HyperCertSVG";
+import { content } from "../components/GreenPillForm";
 export const generateSVG = ({
   contributor = "",
   reason = "",

@@ -27,4 +27,4 @@ const button = tv({
   },
 });
 
-export const Button = createComponent("button", button);
+export const Button = createComponent("button", button as never);

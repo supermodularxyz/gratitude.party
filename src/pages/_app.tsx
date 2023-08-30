@@ -1,37 +1,31 @@
-import "@rainbow-me/rainbowkit/styles.css";
 import { type AppType } from "next/dist/shared/lib/utils";
-
-import { PrivyProvider, User } from '@privy-io/react-auth';
-
+import { PrivyProvider } from '@privy-io/react-auth';
+import type { User } from '@privy-io/react-auth';
+import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { WagmiConfig, createConfig } from "wagmi";
 import { goerli, optimism } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
-import { publicProvider } from "wagmi/providers/public";
 
-
-import site from "config/site";
+import site from "../config/site";
 import { NextSeo } from "next-seo";
 import "../styles/globals.css";
 
-const availableChains =
-  process.env.NODE_ENV !== "production" ? [goerli, optimism] : [optimism];
 
-const { chains, publicClient } = configureChains(
-  [...availableChains],
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
-    publicProvider(),
-  ]
-);
-const handleLogin = (user: User) => {
+
+  import { createPublicClient, http } from 'viem';
+   
+  const wagmiConfig = createConfig({
+    autoConnect: true,
+    publicClient: createPublicClient({
+      chain: process.env.NODE_ENV === 'production' ? optimism : goerli,
+      transport: http()
+    }),
+  })
+
+  const handleLogin = (user: User) => {
   console.log(`User ${user?.id} logged in!`)
 }
 
-
-const { connectors } = getDefaultWallets({ appName: site.title, chains, projectId: process.env.NEXT_PUBLIC_APP_PROJECT_ID as string });
-
-const wagmiClient = createConfig({ autoConnect: true, connectors, publicClient });
 const queryClient = new QueryClient();
 
 const { title, description, url } = site;
@@ -66,7 +60,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         }}
       />
       <QueryClientProvider client={queryClient}>
-        <WagmiConfig config={wagmiClient}>
+        <WagmiConfig config={wagmiConfig}>
           
           <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
@@ -74,9 +68,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         config={{
           loginMethods: ['email', 'wallet'],
           appearance: {
-            theme: 'light',
-            accentColor: '#676FFF',
-            logo: 'https://your-logo-url',
+            theme: 'dark',
+            accentColor: '#C2E812',
+            logo: 'https://greenpill.network/src/images/greenpill-logo.svg',
+            
           },
         }}
       >

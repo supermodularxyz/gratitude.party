@@ -1,11 +1,11 @@
-import { useContractConfig } from "hooks/deprecated /not required /useContractConfig";
+import hyperCertClient from "hooks/useHypercert";
 import Link from "next/link";
 import { useNetwork } from "wagmi";
 import { Button } from "./Button";
 import { createOpenSeaUrl } from "./OpenSeaButton";
 
 export const TweetButton = ({ text = "", tokenId = "" }) => {
-  const { address } = useContractConfig("HypercertMinter");
+  const { address } = hyperCertClient.contract;
   const { chain } = useNetwork();
   if (!chain?.id) return null;
   return (

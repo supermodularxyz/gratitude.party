@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type NextPage } from "next";
-
-import { LandingLayout, Layout } from "layouts/Layout";
-import { Flare } from "components/Flare";
-import { Button } from "components/Button";
+import React from "react";
+import { LandingLayout, Layout } from "../layouts/Layout";
+import { Flare } from "../components/Flare";
+import { Button } from "../components/Button";
 import Link from "next/link";
 
 const Home: NextPage = () => {

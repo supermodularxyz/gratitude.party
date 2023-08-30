@@ -1,10 +1,11 @@
-import {
+/* eslint-disable */
+import React, {
   ComponentPropsWithRef,
-  forwardRef,
   ReactNode,
   ElementType,
+  forwardRef
 } from "react";
-import { TVReturnType, TVSlots } from "tailwind-variants";
+import type { TVReturnType, TVSlots } from "tailwind-variants";
 
 export type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>["ref"];
@@ -17,7 +18,7 @@ export type ComponentProps<C extends ElementType> = {
 // TODO: How to get props typings for the TV props (eg, color)?
 export const createComponent = (
   tag: string | ElementType,
-  variant: TVReturnType<any, any, TVSlots, TVSlots, string, any>
+  variant: TVReturnType<any, any, never, never, never, any>
 ) => {
   // eslint-disable-next-line react/display-name
   const Comp = forwardRef(
@@ -31,7 +32,7 @@ export const createComponent = (
         <Component
           ref={ref}
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          className={variant({ class: className, ...props })}
+          className={variant({ class: className, ...props } as never)}
           {...props}
         />
       );

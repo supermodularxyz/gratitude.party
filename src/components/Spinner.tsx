@@ -1,6 +1,7 @@
+import React from "react";
 import { gradient } from "./Button";
 
-export const Spinner = ({ className = "" }) => (
+export const Spinner = () => (
   <div
     className={`relative h-32 w-32 animate-spin rounded-full bg-gradient-to-b ${gradient}`}
   >

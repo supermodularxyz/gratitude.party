@@ -1,13 +1,11 @@
-import { ethers } from "ethers";
-import { Layout } from "layouts/Layout";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useNetwork, useWaitForTransaction } from "wagmi";
-import { HypercertMinterABI } from "@hypercerts-org/sdk";
-import { Spinner } from "components/Spinner";
-import { Button } from "components/Button";
+import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { useNetwork, useWaitForTransaction } from "wagmi";
+import { Button } from "../../components/Button";
+import { Spinner } from "../../components/Spinner";
+import { Layout } from "../../layouts/Layout";
 
 const createTxUrl = (hash: string, network: string) => {
   const networkMap = { goerli: "goerli", optimism: "optimistic" };
@@ -21,21 +19,8 @@ const MintingCert: NextPage = () => {
   const { chain } = useNetwork();
   const tx = useWaitForTransaction({ hash, enabled: !!hash });
 
-  useEffect(() => {
-    if (tx.data?.logs?.[1]) {
-      const iface = new ethers.utils.Interface(HypercertMinterABI);
-      // Get ImpactClaimed event data
-      const claim = iface.parseLog(tx.data?.logs?.[1]);
-
-      // Claim ID is <contract_address>-<tokenId>
-      // Not sure why tx.data.to has different casing compared to what the hypercertSdk.claimById() expects
-      // Another way could be to get address from useContractConfig hook
-      const claimId = [tx.data.to.toLowerCase(), claim.args.id].join("-");
-
-      router.push(`/hypercert/${claimId}`);
-    }
-  }, [tx.data?.logs]);
-
+  // TODO: Update this usecase
+  
   return (
     <Layout>
       <div className="flex h-full flex-col items-center sm:pt-32">

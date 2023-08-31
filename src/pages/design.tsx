@@ -5,13 +5,15 @@ import z from "zod";
 // import { useFormContext } from "react-hook-form";
 
 import { Layout } from "../layouts/Layout";
-import { Button } from "../components/Button";
+// import { Button } from "../components/Button";
 // import { Designer } from "components/Designer";
 import { Form } from "../components/Form";
 import { GreenPillForm } from "../components/GreenPillForm";
 import { generateSVG } from "../utils/svg";
 import { createClaim } from "../utils/createClaim";
 import React from "react";
+//chakra migration
+import {Button} from '@chakra-ui/react'
 
 const Schema = z.object({
   contributor: z.string(),

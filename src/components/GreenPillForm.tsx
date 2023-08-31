@@ -11,11 +11,10 @@ export const content = {
 // chakra migration
 
 import {
-    FormErrorMessage,
+    // FormErrorMessage,
     FormLabel,
     FormControl,
-    Input,
-    Button,
+    Input
   } from '@chakra-ui/react'
 
 // export const gratitudeTemplate = ({ contributor = "", Description = "" }) =>
@@ -36,9 +35,11 @@ export const GreenPillForm = () => {
 
 
   return (
+
     <div className="text-lg text-green-900 gap-4">
       <div className="flex flex-row justify-between w-full gap-2">
         <div className="flex flex-col w-full">
+            
       <FormControl label={'Name of your Chapter'}>
         <FormLabel htmlFor="name">Name of your Chapter</FormLabel>
         <Input
@@ -52,7 +53,6 @@ export const GreenPillForm = () => {
       <FormLabel htmlFor="tags">Tags for Scope of Workr</FormLabel>
         <Input
           maxLength={MAX_DESCRIPTION_LENGTH}
-          
           required
           placeholder="Social Impact, Public Health, Education, etc."
         />

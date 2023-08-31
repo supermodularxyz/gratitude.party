@@ -9,6 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^4.5.15",
     "@hookform/resolvers": "^3.0.0",
     "@hypercerts-org/sdk": "^0.3.1",
@@ -17,9 +20,12 @@
     "@radix-ui/react-tabs": "^1.0.3",
     "@tanstack/react-query": "^4.28.0",
     "@wagmi/core": "^0.10.6",
+    "chakra-dayzed-datepicker": "^0.2.9",
     "clsx": "^1.2.1",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
+    "dayzed": "^3.2.3",
     "ethers": "^5.7.2",
+    "framer-motion": "^10.16.2",
     "graphql": "^16.6.0",
     "graphql-request": "^6.0.0",
     "next": "13.2.4",

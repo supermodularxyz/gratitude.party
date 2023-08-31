@@ -1,4 +1,4 @@
-import { usePrivy } from '@privy-io/react-auth';
+// import { usePrivy } from '@privy-io/react-auth';
 import { BackgroundCurves } from "components/BackgroundCurves";
 import { BackgroundFlares } from "components/BackgroundFlares";
 import { Button } from "components/Button";
@@ -37,7 +37,7 @@ export const Layout = (props: PropsWithChildren) => {
           <Link href={"/"} className="text-lg font-bold text-green-900">
             {site.title}
           </Link>
-          <PrivyAuthButton />
+          {/* <PrivyAuthButton /> */}
         </div>
         <main className="container relative mx-auto flex max-w-screen-sm flex-1 flex-col p-4 text-gray-900">
           <div className="flex-1">{props.children}</div>
@@ -66,7 +66,7 @@ export const LandingLayout = (props: PropsWithChildren) => {
             {site.title}
           </Link>
           
-          <PrivyAuthButton />
+          {/* <PrivyAuthButton /> */}
           
         </div>
         <main className="container relative mx-auto flex max-w-screen-xl flex-1 flex-col p-4 text-gray-900">
@@ -81,14 +81,14 @@ export const LandingLayout = (props: PropsWithChildren) => {
 
 
 
-function PrivyAuthButton() {
-  const { login, ready, authenticated, user, logout } = usePrivy()
+// function PrivyAuthButton() {
+//   const { login, ready, authenticated, user, logout } = usePrivy()
 
-  if(!ready) return <div>Loading...</div>
+//   if(!ready) return <div>Loading...</div>
 
-  if(authenticated) 
-  return <Button onClick={logout}>Logged in as {user?.wallet?.address}</Button>
+//   if(authenticated) 
+//   return <Button onClick={logout}>Logged in as {user?.wallet?.address}</Button>
 
-  if(ready && !authenticated)
-  return <Button onClick={login}>Log in</Button>;
-}
+//   if(ready && !authenticated)
+//   return <Button onClick={login}>Log in</Button>;
+// }

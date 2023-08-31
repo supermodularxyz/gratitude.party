@@ -1,6 +1,6 @@
 import { type AppType } from "next/dist/shared/lib/utils";
-import { PrivyProvider } from '@privy-io/react-auth';
-import type { User } from '@privy-io/react-auth';
+// import { PrivyProvider } from '@privy-io/react-auth';
+// import type { User } from '@privy-io/react-auth';
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiConfig, createConfig } from "wagmi";
@@ -9,6 +9,8 @@ import { goerli, optimism } from "wagmi/chains";
 import site from "../config/site";
 import { NextSeo } from "next-seo";
 import "../styles/globals.css";
+
+import { ChakraProvider } from '@chakra-ui/react'   
 
 
 
@@ -34,6 +36,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   
   return (
     <>
+    <ChakraProvider>
       <NextSeo
         title={title}
         description={description}
@@ -61,7 +64,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       />
       <QueryClientProvider client={queryClient}>
         <WagmiConfig config={wagmiConfig}>
-          
+{/*           
           <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
         onSuccess={handleLogin}
@@ -74,12 +77,13 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             
           },
         }}
-      >
+      > */}
             <Component {...pageProps} />
-            </PrivyProvider>
+            {/* </PrivyProvider> */}
           
         </WagmiConfig>
       </QueryClientProvider>
+      </ChakraProvider>
     </>
   );
 };

@@ -6,8 +6,10 @@ import { Flare } from "../components/Flare";
 import { Button } from "../components/Button";
 import Link from "next/link";
 
+
 const Home: NextPage = () => {
   return (
+    
     <LandingLayout>
       <div className="md:flex">
         <div className="flex flex-col justify-center md:w-1/2">
@@ -41,6 +43,7 @@ const Home: NextPage = () => {
         </div>
       </div>
     </LandingLayout>
+    
   );
 };
 
